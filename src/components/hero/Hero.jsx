@@ -1,11 +1,17 @@
 import React from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
+import { motion } from 'framer-motion';
 
 import './Hero.scss';
 
 function Hero() {
     return (
-        <div className="hero">
+        <motion.div
+            className="hero"
+            initial={{ y: -1000 }}
+            animate={{ y: 0 }}
+            transition={{ type: 'twin', duration: '1' }}
+        >
             <div className="content">
                 <h1>Find the Perfect place</h1>
                 <p className="search-text">
@@ -28,7 +34,7 @@ function Hero() {
                     </div>
                 </form>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
