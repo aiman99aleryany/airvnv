@@ -8,7 +8,7 @@ function App() {
 
     return (
         <React.StrictMode>
-            <RouterProvider router={routes}></RouterProvider>;
+            <RouterProvider router={routes}></RouterProvider>
         </React.StrictMode>
     );
 }
