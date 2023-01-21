@@ -19,7 +19,6 @@ const initProperty = {
         fifth: '',
     },
     createdAt: Date.now(),
-    updatedAt: Date.now(),
     startDate: '',
     endDate: '',
     details: {
@@ -28,7 +27,15 @@ const initProperty = {
         beds: 0,
         baths: 0,
     },
-    offers: {},
+    offers: {
+        wifi: false,
+        kitchen: false,
+        parking: false,
+        pets: false,
+        tv: false,
+        pool: false,
+        smoke: false,
+    },
     description: '',
 };
 
