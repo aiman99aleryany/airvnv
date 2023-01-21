@@ -1,6 +1,8 @@
 import React from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 
+import './Hero.scss';
+
 function Hero() {
     return (
         <div className="hero">
