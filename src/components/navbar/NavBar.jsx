@@ -21,7 +21,10 @@ function NavBar() {
                     </span>
                     VnV
                 </h1>
-                <button className="btn">Sign In</button>
+                <Link className="signinBtn" to={'/signin'}>
+                    <button className="btn">Sign In</button>
+                </Link>
+
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                     <li>
                         <Link to={'/'}>Home</Link>
