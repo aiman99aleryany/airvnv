@@ -22,8 +22,14 @@ const initProperty = {
     updatedAt: Date.now(),
     startDate: '',
     endDate: '',
-    details: {},
+    details: {
+        guests: 0,
+        bedrooms: 0,
+        beds: 0,
+        baths: 0,
+    },
     offers: {},
+    description: '',
 };
 
 export default initProperty;
