@@ -74,15 +74,42 @@
 
     &-title {
         padding: 0 0.4rem;
-        margin-top: 2rem;
+        margin-top: 1rem;
         margin-bottom: 1rem;
         color: #000000;
         font-size: 1.3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        h3 {
+            width: 90%;
+        }
     }
 
     &-description {
-        padding: 0 0.4rem;
+        padding: 0.5rem;
         color: rgb(91, 87, 87);
+        height: 20%;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: start;
+        p {
+            width: 90%;
+            height: 100px;
+            line-height: 20px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -moz-box-orient: vertical;
+            -ms-box-orient: vertical;
+            box-orient: vertical;
+            -webkit-line-clamp: 5;
+            -moz-line-clamp: 5;
+            -ms-line-clamp: 5;
+            line-clamp: 5;
+            overflow: hidden;
+        }
     }
 
     &-details {
@@ -99,6 +126,14 @@
 
             * {
                 margin-right: 5px;
+            }
+
+            .icon {
+                color: #5651e5;
+            }
+
+            span {
+                color: #5651e5;
             }
         }
 

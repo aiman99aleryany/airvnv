@@ -1,7 +1,11 @@
 import React from 'react';
-
+import { ScrollRestoration } from 'react-router-dom';
 function Bookings() {
-    return <div>Bookings</div>;
+    return (
+        <div>
+            <ScrollRestoration />
+        </div>
+    );
 }
 
 export default Bookings;

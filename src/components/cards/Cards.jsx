@@ -87,8 +87,8 @@ function Cards() {
             <div className="cards-content">
                 {filterProperties(properties, filterProps).map((property) => (
                     <motion.div
-                        initial={{ x: -1000 }}
-                        animate={{ x: 0 }}
+                        initial={{ y: 1000 }}
+                        animate={{ y: 0 }}
                         transition={{ type: 'twin', duration: 1, delay: 0.1 }}
                         key={nanoid()}
                     >

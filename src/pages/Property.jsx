@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import NavBar from '../components/navbar/NavBar';
 import List from '../components/list/List';
+import { ScrollRestoration } from 'react-router-dom';
 import useStoreProperties from '../store/store';
 
 function Property() {
@@ -18,7 +20,9 @@ function Property() {
 
     return (
         <div>
+            <NavBar />
             {targetedProperty && <List property={targetedProperty[0]}></List>}
+            <ScrollRestoration />
         </div>
     );
 }
