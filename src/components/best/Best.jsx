@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import Apt1 from '../../assets/apartment1.jpg';
 import Apt2 from '../../assets/apartment2.jpg';
 import Apt3 from '../../assets/apartment3.jpg';
@@ -23,7 +23,9 @@ function Best() {
                 <img src={Apt2} alt="2" />
                 <img src={Apt3} alt="3" />
             </div>
-            <button className="btn">View All</button>
+            <Link to={'/view-all'}>
+                <button className="btn">View All</button>
+            </Link>
         </div>
     );
 }

@@ -4,6 +4,8 @@ import useStoreProperties from '../../store/store';
 import useStorePropertiesFilters from '../../store/store-propertiesFilters';
 import { toUnix } from '../../store/unixTime';
 import { nanoid } from 'nanoid';
+import { motion } from 'framer-motion';
+
 import './Cards.scss';
 function Cards() {
     const properties = useStoreProperties((state) => state.properties);
@@ -82,9 +84,18 @@ function Cards() {
 
     return (
         <div className="cards">
-            {filterProperties(properties, filterProps).map((property) => (
-                <Card property={property} key={nanoid()} />
-            ))}
+            <div className="cards-content">
+                {filterProperties(properties, filterProps).map((property) => (
+                    <motion.div
+                        initial={{ x: -1000 }}
+                        animate={{ x: 0 }}
+                        transition={{ type: 'twin', duration: 1, delay: 0.1 }}
+                        key={nanoid()}
+                    >
+                        <Card property={property} />
+                    </motion.div>
+                ))}
+            </div>
         </div>
     );
 }

@@ -10,7 +10,7 @@ function Hero() {
             className="hero"
             initial={{ y: -1000 }}
             animate={{ y: 0 }}
-            transition={{ type: 'twin', duration: '1' }}
+            transition={{ type: 'twin', duration: 1, delay: 0.1 }}
         >
             <div className="content">
                 <h1>Find the Perfect place</h1>

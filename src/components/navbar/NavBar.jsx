@@ -21,11 +21,13 @@ function NavBar() {
         >
             <div className="container">
                 <h1>
-                    <span>
-                        <BsFillHouseFill />
-                        Air
-                    </span>
-                    VnV
+                    <Link to={'/'}>
+                        <span>
+                            <BsFillHouseFill />
+                            Air
+                        </span>
+                        VnV
+                    </Link>
                 </h1>
                 <Link className="addBtn" to={'/add-property'}>
                     <button className="btn">Add Property</button>
