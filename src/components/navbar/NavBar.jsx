@@ -12,7 +12,14 @@ function NavBar() {
     const handleClick = () => setClick(!click);
 
     return (
-        <div className="navbar">
+
+        <motion.div
+            initial={{ x: '-100vh' }}
+            animate={{ x: 0 }}
+            transition={{ type: 'spring', stiffness: 120 }}
+            className="navbar"
+        >
+
             <div className="container">
                 <h1>
                     <span>
@@ -21,6 +28,9 @@ function NavBar() {
                     </span>
                     VnV
                 </h1>
+                <Link className="addBtn" to={'/add-property'}>
+                    <button className="btn">Add Property</button>
+                </Link>
                 <Link className="signinBtn" to={'/signin'}>
                     <button className="btn">Sign In</button>
                 </Link>
