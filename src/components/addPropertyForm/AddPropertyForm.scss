@@ -4,18 +4,18 @@
     justify-content: center;
     align-items: center;
     font-family: 'Inter', sans-serif;
+    font-weight: 700;
     font-size: 1rem;
     font-size: 1rem;
-    padding: 3% 5%;
+    padding: 2% 0;
     form {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         gap: 1rem;
-        width: 90%;
         border: 5px solid #5651e5;
-        padding: 1rem 2rem;
+        padding: 1rem;
         border-radius: 30px;
         h1 {
             color: #5651e5;
@@ -23,17 +23,113 @@
         div {
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 100%;
+
             label {
+                width: 10rem;
                 margin-right: 3%;
+            }
+        }
+        .photos-wrapper {
+            gap: 4.5rem;
+            .photos {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .desc {
+            label {
+                width: 9.4rem;
+            }
+            textarea {
+                font-size: 16px;
+                border-width: 0.2px;
+                background-color: #ffffff;
+                color: #000000;
+                border-radius: 9px;
+                padding: 0.5rem;
             }
         }
         .select {
             select {
-                width: 50%;
+                width: fit-content;
                 padding: 1%;
                 border-radius: 10px;
+            }
+        }
+        .location {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 1rem;
+            label {
+                width: fit-content;
+            }
+            input {
+                margin-left: 5rem;
+            }
+            div {
+                &:nth-of-type(2) {
+                    input {
+                        margin-left: 6.9rem;
+                    }
+                }
+            }
+        }
+        .date {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 1rem;
+            label {
+                width: fit-content;
+            }
+            input {
+                margin-left: 6.9rem;
+            }
+            div {
+                &:nth-of-type(2) {
+                    input {
+                        margin-left: 8rem;
+                    }
+                }
+            }
+        }
+        .address {
+            label {
+                width: 9.4rem;
+            }
+            textarea {
+                font-size: 16px;
+                border-width: 0.2px;
+                background-color: #ffffff;
+                color: #000000;
+                border-radius: 9px;
+                padding: 0.5rem;
+            }
+        }
+        .details {
+            display: flex;
+            flex-direction: column;
+            div {
+                input {
+                    padding: 5px;
+                    font-size: 14px;
+                    border-width: 2px;
+                    border-color: #5651e5;
+                    background-color: #ffffff;
+                    color: #000000;
+                    border-radius: 9px;
+
+                    &:focus {
+                        outline: none;
+                        border-color: #00b4e8;
+                        box-shadow: 0px 0px 5px rgba(86, 81, 229, 0.75);
+                    }
+                }
             }
         }
     }
@@ -42,7 +138,8 @@
 .text-input {
     padding: 5px;
     font-size: 16px;
-    border-width: 0.2px;
+    border-width: 2px;
+    border-color: #5651e5;
     background-color: #ffffff;
     color: #000000;
     border-radius: 9px;
@@ -56,9 +153,47 @@
 
 @media only screen and (min-width: 940px) {
     .form-wrapper {
-        padding: 3% 30%;
+        padding: 3%;
         form {
-            width: 100%;
+            .location {
+                flex-direction: row;
+                gap: 2rem;
+                div {
+                    &:nth-of-type(2) {
+                        input {
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+            .date {
+                flex-direction: row;
+                gap: 2rem;
+                div {
+                    input {
+                        margin-left: 6.8rem;
+                    }
+                    &:nth-of-type(2) {
+                        input {
+                            margin-left: 0;
+                        }
+                    }
+                }
+            }
+            .address {
+                textarea {
+                    width: 25rem;
+                }
+            }
+            .desc {
+                textarea {
+                    width: 25rem;
+                }
+            }
+            .details {
+                flex-direction: row;
+                gap: 1rem;
+            }
         }
     }
 }
