@@ -51,8 +51,25 @@
 
 @media only screen and (min-width: 940px) {
     .navbar {
+        .container {
+            max-width: 100%;
+        }
         .hamburger {
             display: none;
+        }
+
+        .nav-menu {
+            max-width: fit-content;
+            position: static;
+            flex-direction: row;
+            order: 2;
+            li a {
+                font-size: 1.4rem;
+            }
+        }
+
+        button {
+            order: 3;
         }
     }
 }

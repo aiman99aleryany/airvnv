@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { HiOutlineMenuAlt4 } from 'react-icons/hi';
 import { FaRegTimesCircle } from 'react-icons/fa';
 import { BsFillHouseFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+
 import './NavBar.scss';
 
 function NavBar() {
@@ -22,16 +24,7 @@ function NavBar() {
                 <button className="btn">Sign In</button>
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                     <li>
-                        <a href="#">Home</a>
-                    </li>
-                    <li>
-                        <a href="#">Search</a>
-                    </li>
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
+                        <Link to={'/'}>Home</Link>
                     </li>
                 </ul>
                 <div className="hamburger" onClick={handleClick}>
