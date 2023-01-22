@@ -6,9 +6,8 @@
     position: relative;
     margin-bottom: 4rem;
 
-    &:before {
+    &-background {
         content: '';
-
         background: url('../../assets/hero-img.jpg') no-repeat center
             center/cover;
         width: 100%;
@@ -49,16 +48,17 @@
         border: 1px solid #ccc;
         padding: 4px;
         border-radius: 8px;
-
-        input[type='text'] {
-            border: transparent;
-            background-color: transparent;
+        div {
             width: 100%;
-            font-size: 1.2rem;
-            font-family: 'Inter', sans-serif;
-
-            &:focus {
-                outline: none;
+            input[type='text'] {
+                border: transparent;
+                background-color: transparent;
+                width: 100%;
+                font-size: 1.2rem;
+                font-family: 'Inter', sans-serif;
+                &:focus {
+                    outline: none;
+                }
             }
         }
 

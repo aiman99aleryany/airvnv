@@ -236,7 +236,6 @@
         justify-content: space-between;
         align-items: center;
 
-        border-bottom: 1px solid grey;
         span {
             color: #333;
             font-size: 1.5rem;
@@ -257,7 +256,6 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        border-bottom: 1px solid grey;
         span {
             color: #333;
             font-size: 1.5rem;
@@ -285,20 +283,37 @@
         box-shadow: 0 -1px 20px 1px grey;
         h4 {
             font-weight: 700;
+            font-size: 1.5rem;
+            color: #5651e5;
         }
 
         ul {
+            width: 70%;
             display: flex;
             flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
         li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
             border-radius: 5px;
-            border: 2px solid #2e29c7;
+            // border: 0.1px solid grey;
             color: #333;
-        }
-        span {
-            color: #2e29c7;
+            font-weight: 700;
+            .icon {
+                margin-right: 0.5rem;
+                color: #5651e5;
+            }
+
+            span {
+                color: #5651e5;
+                margin-left: auto;
+                font-weight: 700;
+            }
         }
     }
 
@@ -316,18 +331,37 @@
         box-shadow: 0 -1px 20px 1px grey;
         h4 {
             font-weight: 700;
+            font-size: 1.5rem;
+            color: #5651e5;
         }
 
         ul {
+            width: 70%;
             display: flex;
             flex-wrap: wrap;
+            flex-direction: column;
+            gap: 0.5rem;
         }
 
         li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            // border: 0.1px solid grey;
             color: #333;
-        }
-        span {
-            color: #2e29c7;
+            font-weight: 700;
+            .icon {
+                margin-right: 0.5rem;
+                color: #5651e5;
+            }
+
+            span {
+                color: #5651e5;
+                margin-left: auto;
+                font-weight: 700;
+            }
         }
     }
 }

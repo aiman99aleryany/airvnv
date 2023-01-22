@@ -3,10 +3,23 @@ import React, { useState } from 'react';
 import { fromUnix } from '../../store/unixTime';
 import { AiFillStar } from 'react-icons/ai';
 import { FiUser } from 'react-icons/fi';
-import { MdOutlineBedroomParent } from 'react-icons/md';
-import { FaBed, FaBath } from 'react-icons/fa';
+import {
+    MdOutlineBedroomParent,
+    MdOutlineMonitor,
+    MdPets,
+    MdLocalParking,
+} from 'react-icons/md';
+import {
+    FaBed,
+    FaBath,
+    FaWifi,
+    FaSmoking,
+    FaSwimmingPool,
+} from 'react-icons/fa';
+import { TbToolsKitchen2 } from 'react-icons/tb';
 
 import './List.scss';
+
 function List(props) {
     const [imageIndex, setImageIndex] = useState(0);
 
@@ -125,16 +138,20 @@ function List(props) {
                     <h4>Details</h4>
                     <ul>
                         <li>
+                            <FiUser className="icon" />
                             Guests:
                             <span>{guests}</span>
                         </li>
                         <li>
+                            <MdOutlineBedroomParent className="icon" />
                             Bedrooms: <span>{bedrooms}</span>{' '}
                         </li>
                         <li>
+                            <FaBed className="icon" />
                             Beds: <span> {beds}</span>{' '}
                         </li>
                         <li>
+                            <FaBath className="icon" />
                             Baths: <span>{baths}</span>
                         </li>
                     </ul>
@@ -144,25 +161,34 @@ function List(props) {
                     <h4>Offers </h4>
                     <ul>
                         <li>
+                            <FaWifi className="icon" />
                             Wifi: {wifi ? <span>Yes</span> : <span>no</span>}
                         </li>
                         <li>
+                            <TbToolsKitchen2 className="icon" />
                             Kitchen:{' '}
                             {kitchen ? <span>Yes</span> : <span>no</span>}
                         </li>
-                        <li>TV: {tv ? <span>Yes</span> : <span>no</span>}</li>
                         <li>
+                            <MdOutlineMonitor className="icon" />
+                            TV: {tv ? <span>Yes</span> : <span>no</span>}
+                        </li>
+                        <li>
+                            <MdPets className="icon" />
                             Pets: {pets ? <span>Yes</span> : <span>no</span>}
                         </li>
                         <li>
+                            <FaSmoking className="icon" />
                             Smoking:{' '}
                             {smoke ? <span>Yes</span> : <span>no</span>}
                         </li>
                         <li>
+                            <MdLocalParking className="icon" />
                             Parking:{' '}
                             {parking ? <span>Yes</span> : <span>no</span>}
                         </li>
                         <li>
+                            <FaSwimmingPool className="icon" />
                             Pool: {pool ? <span>Yes</span> : <span>no</span>}
                         </li>
                     </ul>

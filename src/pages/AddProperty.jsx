@@ -8,6 +8,7 @@ function AddProperty() {
     const isUserSignIn = getLocalStorage('isUserSignedIn');
     return (
         <div>
+            <ScrollRestoration />
             <NavBar />
             {isUserSignIn ? (
                 <AddPropertyForm />
@@ -16,8 +17,6 @@ function AddProperty() {
                     <button className="btn">Sign in to add property</button>
                 </Link>
             )}
-
-            <ScrollRestoration />
         </div>
     );
 }

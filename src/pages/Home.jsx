@@ -10,11 +10,11 @@ function Home() {
     console.log(currentUser);
     return (
         <div>
+            <ScrollRestoration />
             <NavBar />
             <Hero />
             <Best />
             <Featured />
-            <ScrollRestoration />
         </div>
     );
 }

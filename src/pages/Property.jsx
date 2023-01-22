@@ -20,9 +20,9 @@ function Property() {
 
     return (
         <div>
+            <ScrollRestoration />
             <NavBar />
             {targetedProperty && <List property={targetedProperty[0]}></List>}
-            <ScrollRestoration />
         </div>
     );
 }
