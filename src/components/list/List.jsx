@@ -2,6 +2,9 @@ import { nanoid } from 'nanoid';
 import React, { useState } from 'react';
 import { fromUnix } from '../../store/unixTime';
 import { AiFillStar } from 'react-icons/ai';
+import { FiUser } from 'react-icons/fi';
+import { MdOutlineBedroomParent } from 'react-icons/md';
+import { FaBed, FaBath } from 'react-icons/fa';
 
 import './List.scss';
 function List(props) {
@@ -86,6 +89,10 @@ function List(props) {
                     </div>
                 </div>
 
+                <div className="list-price">
+                    <span>${price}/Night</span>
+                </div>
+
                 <div className="list-location">
                     <h3>Location</h3>
                     <div>
@@ -102,20 +109,20 @@ function List(props) {
                     <span>About the Property</span>
                     <p>{description}</p>
                 </div>
+                <div className="list-date">
+                    <div className="list-startDate">
+                        <span>Available From</span>
+                        <time>{startDate}</time>
+                    </div>
 
-                <div className="list-price">
-                    <span>${price}/Night</span>
-                </div>
-
-                <div className="list-startDate">
-                    <time>{startDate}</time>
-                </div>
-
-                <div className="list-endDate">
-                    <time>{endDate}</time>
+                    <div className="list-endDate">
+                        <span>To</span>
+                        <time>{endDate}</time>
+                    </div>
                 </div>
 
                 <div className="list-details">
+                    <h4>Details</h4>
                     <ul>
                         <li>
                             Guests:
@@ -134,6 +141,7 @@ function List(props) {
                 </div>
 
                 <div className="list-offers">
+                    <h4>Offers </h4>
                     <ul>
                         <li>
                             Wifi: {wifi ? <span>Yes</span> : <span>no</span>}
