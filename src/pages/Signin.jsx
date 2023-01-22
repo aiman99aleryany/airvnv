@@ -6,8 +6,8 @@ import SigninForm from '../components/signinForm/SigninForm';
 function Signin() {
     return (
         <div>
-            <NavBar />
             <ScrollRestoration />
+            <NavBar />
             <SigninForm />
         </div>
     );

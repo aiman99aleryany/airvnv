@@ -12,6 +12,7 @@ function Hero() {
             animate={{ y: 0 }}
             transition={{ type: 'twin', duration: 1, delay: 0.1 }}
         >
+            <div className="hero-background"></div>
             <div className="content">
                 <h1>Find the Perfect place</h1>
                 <p className="search-text">
@@ -23,15 +24,9 @@ function Hero() {
                     <div>
                         <input type="text" placeholder="Enter Keyword.." />
                     </div>
-                    <div className="radio">
-                        <input type="radio" checked />
-                        <label htmlFor="">Buy</label>
-                        <input type="radio" />
-                        <label htmlFor="">Rent</label>
-                        <button type="submit">
-                            <AiOutlineSearch className="icon" />
-                        </button>
-                    </div>
+                    <button type="submit">
+                        <AiOutlineSearch className="icon" />
+                    </button>
                 </form>
             </div>
         </motion.div>

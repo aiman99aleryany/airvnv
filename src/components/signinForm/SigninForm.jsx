@@ -49,28 +49,29 @@ function SigninForm() {
 
     return (
         <div className="form-wrapper">
+            <div className="animated-border"></div>
             <form>
-                <label htmlFor="username">
-                    Username{' '}
-                    <input
-                        type="text"
-                        name="username"
-                        className="text-input"
-                        autoComplete="off"
-                        value={username}
-                        onChange={usernameChangeHandler}
-                    />
-                </label>
-                <label htmlFor="password">
-                    Password{' '}
-                    <input
-                        type="password"
-                        name="password"
-                        className="text-input"
-                        value={password}
-                        onChange={passwordChangeHandler}
-                    />
-                </label>
+                <h1>Sign in</h1>
+
+                <input
+                    type="text"
+                    name="username"
+                    className="text-input"
+                    autoComplete="off"
+                    value={username}
+                    onChange={usernameChangeHandler}
+                    placeholder="Username..."
+                />
+
+                <input
+                    type="password"
+                    name="password"
+                    className="text-input"
+                    value={password}
+                    onChange={passwordChangeHandler}
+                    placeholder="Password..."
+                />
+
                 <button type="submit" className="btn" onClick={submitUser}>
                     {' '}
                     Sign in
