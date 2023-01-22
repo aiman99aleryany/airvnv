@@ -5,6 +5,7 @@ import Signin from './pages/Signin';
 import Property from './pages/Property';
 import ViewAll from './pages/ViewAll';
 import Test from './pages/Test';
+import MyProperties from './pages/MyProperties';
 const AppRoutes = [
     {
         path: 'test',
@@ -17,6 +18,10 @@ const AppRoutes = [
     {
         path: 'signin',
         element: <Signin />,
+    },
+    {
+        path: 'myproperties',
+        element: <MyProperties />,
     },
     {
         path: 'view-all',

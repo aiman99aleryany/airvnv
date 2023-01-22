@@ -15,11 +15,21 @@
         justify-content: center;
         align-items: flex-start;
         gap: 1rem;
-        border: 5px solid #5651e5;
+        border: 1rem dotted #5651e5;
         padding: 1rem;
         border-radius: 30px;
-        background-color: rgba(243, 105, 105, 0.75);
-        h1 {
+        background-color: #ffffff;
+        .offers {
+            display: flex;
+            flex-direction: column;
+            div {
+                display: flex;
+                label {
+                    width: 5rem;
+                    margin-right: 0;
+                    margin-left: 1%;
+                }
+            }
         }
         div {
             display: flex;
@@ -194,6 +204,15 @@
             .details {
                 flex-direction: row;
                 gap: 1rem;
+            }
+            .offers {
+                div {
+                    label {
+                        width: 10rem;
+                        margin-right: 0;
+                        margin-left: 1%;
+                    }
+                }
             }
         }
     }

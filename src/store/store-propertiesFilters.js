@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+
 const INIT_FILTERS = {
     isFiltersApplied: false,
     location: {
@@ -15,21 +16,7 @@ const INIT_FILTERS = {
     },
 };
 const useStorePropertiesFilters = create((set) => ({
-    filterProps: {
-        isFiltersApplied: false,
-        location: {
-            country: '',
-            city: '',
-        },
-        startDate: '',
-        endDate: '',
-        details: {
-            guests: 0,
-            beds: 0,
-            baths: 0,
-            bedrooms: 0,
-        },
-    },
+    filterProps: INIT_FILTERS,
     addFilterProps: (newFilterProps) => {
         return set((state) => ({
             filterProps: { ...state.filterProps, ...newFilterProps },
