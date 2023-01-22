@@ -231,7 +231,6 @@ function AddPropertyForm() {
                                 type="file"
                                 name="fifth"
                                 accept="image/*"
-                                value={images.fifth}
                                 onChange={handleImagesChange}
                             />
                         </label>
@@ -395,60 +394,69 @@ function AddPropertyForm() {
                     </div>
                 </div>
                 <div className="offers">
-                    <input
-                        type="checkbox"
-                        name="wifi"
-                        checked={offers.wifi}
-                        onChange={handleOffersChange}
-                    />
-                    <label htmlFor="wifi">Wifi</label>
-                    <input
-                        type="checkbox"
-                        name="kitchen"
-                        checked={offers.kitchen}
-                        onChange={handleOffersChange}
-                    />
-                    <label htmlFor="kitchen">Kitchen</label>
-                    <input
-                        type="checkbox"
-                        name="pets"
-                        checked={offers.pets}
-                        onChange={handleOffersChange}
-                    />
-                    <label htmlFor="pets">Pets</label>
-                    <input
-                        type="checkbox"
-                        name="tv"
-                        checked={offers.tv}
-                        onChange={handleOffersChange}
-                    />
-                    <label htmlFor="tv">TV</label>
-                    <input
-                        type="checkbox"
-                        name="smoke"
-                        checked={offers.smoke}
-                        onChange={handleOffersChange}
-                    />
-                    <label htmlFor="smoke">Smoke</label>
-                    <input
-                        type="checkbox"
-                        name="parking"
-                        checked={offers.parking}
-                        onChange={handleOffersChange}
-                    />
-                    <label htmlFor="parking">Parking</label>
-                    <input
-                        type="checkbox"
-                        name="pool"
-                        checked={offers.pool}
-                        onChange={handleOffersChange}
-                    />
-                    <label htmlFor="pool">Pool</label>
+                    <div>
+                        <input
+                            type="checkbox"
+                            name="wifi"
+                            checked={offers.wifi}
+                            onChange={handleOffersChange}
+                        />
+                        <label htmlFor="wifi">Wifi</label>
+                        <input
+                            type="checkbox"
+                            name="kitchen"
+                            checked={offers.kitchen}
+                            onChange={handleOffersChange}
+                        />
+                        <label htmlFor="kitchen">Kitchen</label>
+                        <input
+                            type="checkbox"
+                            name="pets"
+                            checked={offers.pets}
+                            onChange={handleOffersChange}
+                        />
+                        <label htmlFor="pets">Pets</label>
+                        <input
+                            type="checkbox"
+                            name="tv"
+                            checked={offers.tv}
+                            onChange={handleOffersChange}
+                        />
+                        <label htmlFor="tv">TV</label>
+                    </div>
+                    <div>
+                        <input
+                            type="checkbox"
+                            name="smoke"
+                            checked={offers.smoke}
+                            onChange={handleOffersChange}
+                        />
+                        <label htmlFor="smoke">Smoke</label>
+                        <input
+                            type="checkbox"
+                            name="parking"
+                            checked={offers.parking}
+                            onChange={handleOffersChange}
+                        />
+                        <label htmlFor="parking">Parking</label>
+                        <input
+                            type="checkbox"
+                            name="pool"
+                            checked={offers.pool}
+                            onChange={handleOffersChange}
+                        />
+                        <label htmlFor="pool">Pool</label>
+                    </div>
                 </div>
+
                 <button className="btn" onClick={handleSubmit}>
                     Add your property
                 </button>
-                {error ? <p>Please Fill All inputs</p> : ''}
+                {error ? (
+                    <p style={{ color: 'red' }}>Please Fill All inputs</p>
+                ) : (
+                    ''
+                )}
             </div>
         </div>
     );

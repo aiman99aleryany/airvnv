@@ -86,18 +86,25 @@ function List(props) {
                     </div>
                 </div>
 
+                <div className="list-location">
+                    <h3>Location</h3>
+                    <div>
+                        <h4>
+                            Country: <span>{country}</span>{' '}
+                        </h4>
+                        <h4>
+                            City: <span>{city}</span>{' '}
+                        </h4>
+                    </div>
+                </div>
+
                 <div className="list-description">
                     <span>About the Property</span>
                     <p>{description}</p>
                 </div>
 
-                <div className="list-location">
-                    <h3>{country}</h3>
-                    <h3>{city}</h3>
-                </div>
-
                 <div className="list-price">
-                    <span>${price}</span>
+                    <span>${price}/Night</span>
                 </div>
 
                 <div className="list-startDate">
