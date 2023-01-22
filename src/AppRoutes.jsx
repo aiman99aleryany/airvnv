@@ -20,7 +20,7 @@ const AppRoutes = [
         element: <Signin />,
     },
     {
-        path: 'myproperties',
+        path: 'my-properties',
         element: <MyProperties />,
     },
     {
