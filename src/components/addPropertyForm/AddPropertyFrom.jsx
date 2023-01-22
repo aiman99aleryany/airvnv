@@ -1,104 +1,239 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './AddPropertyForm.scss';
 import countriesWithCities from '../../store/countriesWithCities';
+import useStoreProperties from '../../store/store';
+import initProperty from '../../store/initProperty';
 
 function AddPropertyForm() {
     // -------------------------States--------------------------------
-    const [titleValue, setTitleValue] = useState('');
-    const [descValue, setDescValue] = useState('');
-    const [priceValue, setPriceValue] = useState('');
-    const [typeValue, setTypeValue] = useState('');
-    const [countryValue, setCountryValue] = useState('');
-    const [cityValue, setCityValue] = useState('');
-    const [addressValue, setAddressValue] = useState('');
-    const [fromDateValue, setFromDateValue] = useState('');
-    const [toDateValue, setToDateValue] = useState('');
-    const [guestsValue, setGuestsValue] = useState('');
-    const [bedroomsValue, setBedroomsValue] = useState('');
-    const [bedsValue, setBedsValue] = useState('');
-    const [bathsValue, setBathsValue] = useState('');
+    const [fields, setFields] = useState(initProperty);
+    const [location, setLocation] = useState(initProperty.location);
+    const [details, setDetails] = useState(initProperty.details);
+    const [offers, setOffers] = useState(initProperty.offers);
+    const [images, setImages] = useState(initProperty.images);
+    const [error, setError] = useState(false);
+
+    const addProperty = useStoreProperties((state) => state.addProperty);
+    const handleFieldsChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setFields((state) => ({
+            ...state,
+            [name]: value,
+        }));
+    };
+
+    useEffect(() => {
+        setFields((state) => ({
+            ...state,
+            location: location,
+            offers: offers,
+            images: images,
+            details: details,
+        }));
+    }, [location, offers, details, images]);
+
+    const handleLocationChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+
+        setLocation((state) => ({
+            ...state,
+            [name]: value,
+        }));
+
+        return;
+    };
+
+    const handleDetailsChange = (e) => {
+        const name = e.target.name;
+        const value = e.target.value;
+        setDetails((state) => ({
+            ...state,
+            [name]: value,
+        }));
+    };
+
+    const handleOffersChange = (e) => {
+        const name = e.target.name;
+        const checked = e.target.checked;
+        setOffers((state) => ({
+            ...state,
+            [name]: checked,
+        }));
+    };
+
+    const handleImagesChange = (e) => {
+        const name = e.target.name;
+        const file = URL.createObjectURL(e.target.files[0]);
+        setImages((state) => ({
+            ...state,
+            [name]: file,
+        }));
+    };
+
+    const handleSubmit = () => {
+        const isImagesExist =
+            images.first &&
+            images.second &&
+            images.third &&
+            images.forth &&
+            images.fifth
+                ? true
+                : false;
+        const isTitleExist = fields.title ? true : false;
+        const isTypeExist = fields.type ? true : false;
+        const isPriceExist = fields.price ? true : false;
+        const isDescriptionExist = fields.description ? true : false;
+        const isLocationExist =
+            location.city && location.country && location.address
+                ? true
+                : false;
+        const isDetailsExist = details.guests ? true : false;
+
+        const isFieldsExist =
+            isImagesExist &&
+            isTitleExist &&
+            isTypeExist &&
+            isPriceExist &&
+            isDescriptionExist &&
+            isLocationExist &&
+            isDetailsExist
+                ? true
+                : false;
+
+        if (isFieldsExist) {
+            addProperty(fields);
+        } else {
+            setError(true);
+        }
+
+        return;
+    };
+
+    // const [titleValue, setTitleValue] = useState('');
+    // const [descValue, setDescValue] = useState('');
+    // const [priceValue, setPriceValue] = useState(0);
+    // const [typeValue, setTypeValue] = useState('');
+    // const [countryValue, setCountryValue] = useState('');
+    // const [cityValue, setCityValue] = useState('');
+    // const [addressValue, setAddressValue] = useState('');
+    // const [fromDateValue, setFromDateValue] = useState('');
+    // const [toDateValue, setToDateValue] = useState('');
+    // const [guestsValue, setGuestsValue] = useState(0);
+    // const [bedroomsValue, setBedroomsValue] = useState(0);
+    // const [bedsValue, setBedsValue] = useState(0);
+    // const [bathsValue, setBathsValue] = useState(0);
+
+    //---------------------------Properties Store------------------------
 
     //------------------- Change Handlers -----------------------------------------------
-    const titleValueChangeHandler = (e) => {
-        setTitleValue(e.target.value);
-    };
+    // const titleValueChangeHandler = (e) => {
+    //     setTitleValue(e.target.value);
+    // };
 
-    const descValueChangeHandler = (e) => {
-        setDescValue(e.target.value);
-    };
+    // const descValueChangeHandler = (e) => {
+    //     setDescValue(e.target.value);
+    // };
 
-    const priceValueChangeHandler = (e) => {
-        setPriceValue(e.target.value);
-    };
+    // const priceValueChangeHandler = (e) => {
+    //     setPriceValue(e.target.value);
+    // };
 
-    const typeValueChangeHandler = (e) => {
-        setTypeValue(e.target.value);
-    };
+    // const typeValueChangeHandler = (e) => {
+    //     setTypeValue(e.target.value);
+    // };
 
-    const countryValueChangeHandler = (e) => {
-        setCountryValue(e.target.value);
-    };
+    // const countryValueChangeHandler = (e) => {
+    //     setCountryValue(e.target.value);
+    // };
 
-    const cityValueChangeHandler = (e) => {
-        setCityValue(e.target.value);
-    };
+    // const cityValueChangeHandler = (e) => {
+    //     setCityValue(e.target.value);
+    // };
 
-    const addressValueChangeHandler = (e) => {
-        setAddressValue(e.target.value);
-    };
+    // const addressValueChangeHandler = (e) => {
+    //     setAddressValue(e.target.value);
+    // };
 
-    const fromDateValueChangeHandler = (e) => {
-        setFromDateValue(e.target.value);
-    };
+    // const fromDateValueChangeHandler = (e) => {
+    //     setFromDateValue(e.target.value);
+    // };
 
-    const toDateValueChangeHandler = (e) => {
-        setToDateValue(e.target.value);
-    };
+    // const toDateValueChangeHandler = (e) => {
+    //     setToDateValue(e.target.value);
+    // };
 
-    const guestsValueChangeHandler = (e) => {
-        setGuestsValue(e.target.value);
-    };
+    // const guestsValueChangeHandler = (e) => {
+    //     setGuestsValue(e.target.value);
+    // };
 
-    const bedroomsValueChangeHandler = (e) => {
-        setBedroomsValue(e.target.value);
-    };
+    // const bedroomsValueChangeHandler = (e) => {
+    //     setBedroomsValue(e.target.value);
+    // };
 
-    const bedsValueChangeHandler = (e) => {
-        setBedsValue(e.target.value);
-    };
+    // const bedsValueChangeHandler = (e) => {
+    //     setBedsValue(e.target.value);
+    // };
 
-    const bathsValueChangeHandler = (e) => {
-        setBathsValue(e.target.value);
-    };
+    // const bathsValueChangeHandler = (e) => {
+    //     setBathsValue(e.target.value);
+    // };
 
     //-------------------------Renders Component ------------------------------------------------
     return (
         <div className="form-wrapper">
-            <form>
+            <div className="form">
                 <h1>Add Your Property</h1>
                 <div className="photos-wrapper">
                     <div className="photos">
-                        <label htmlFor="photo1">
+                        <label htmlFor="first">
                             Cover Photo:{' '}
-                            <input type="file" name="photo1" accept="image/*" />
+                            <input
+                                type="file"
+                                name="first"
+                                accept="image/*"
+                                onChange={handleImagesChange}
+                            />
                         </label>
-                        <label htmlFor="photo2">
+                        <label htmlFor="second">
                             Second Photo:{' '}
-                            <input type="file" name="photo2" accept="image/*" />
+                            <input
+                                type="file"
+                                name="second"
+                                accept="image/*"
+                                onChange={handleImagesChange}
+                            />
                         </label>
-                        <label htmlFor="photo3">
+                        <label htmlFor="third">
                             Third Photo:{' '}
-                            <input type="file" name="photo3" accept="image/*" />
+                            <input
+                                type="file"
+                                name="third"
+                                accept="image/*"
+                                onChange={handleImagesChange}
+                            />
                         </label>
                     </div>
                     <div className="photos">
-                        <label htmlFor="photo4">
+                        <label htmlFor="forth">
                             Fourth Photo:{' '}
-                            <input type="file" name="photo4" accept="image/*" />
+                            <input
+                                type="file"
+                                name="forth"
+                                accept="image/*"
+                                onChange={handleImagesChange}
+                            />
                         </label>
-                        <label htmlFor="photo5">
+                        <label htmlFor="fifth">
                             Fifth Photo:{' '}
-                            <input type="file" name="photo5" accept="image/*" />
+                            <input
+                                type="file"
+                                name="fifth"
+                                accept="image/*"
+                                value={images.fifth}
+                                onChange={handleImagesChange}
+                            />
                         </label>
                     </div>
                 </div>
@@ -110,19 +245,19 @@ function AddPropertyForm() {
                         type="text"
                         name="title"
                         placeholder="Your property's title"
-                        value={titleValue}
-                        onChange={titleValueChangeHandler}
+                        value={fields.title}
+                        onChange={handleFieldsChange}
                     />
                 </div>
                 <div className="desc">
                     <label htmlFor="desc">Description:</label>
                     <textarea
-                        name="desc"
+                        name="description"
                         cols="20"
                         rows="5"
                         placeholder="Tell about your property...."
-                        value={descValue}
-                        onChange={descValueChangeHandler}
+                        value={fields.description}
+                        onChange={handleFieldsChange}
                     ></textarea>
                 </div>
                 <div>
@@ -132,8 +267,8 @@ function AddPropertyForm() {
                         type="number"
                         name="price"
                         placeholder="40"
-                        value={priceValue}
-                        onChange={priceValueChangeHandler}
+                        value={fields.price}
+                        onChange={handleFieldsChange}
                     />
                     <p>$/night</p>
                 </div>
@@ -141,14 +276,14 @@ function AddPropertyForm() {
                     <label htmlFor="type">Property Type:</label>
                     <select
                         name="type"
-                        value={typeValue}
-                        onChange={typeValueChangeHandler}
+                        value={fields.type}
+                        onChange={handleFieldsChange}
                     >
                         <option value="">Choose one</option>
-                        <option value="House">House</option>
-                        <option value="Apartment">Apartment</option>
-                        <option value="Cabin">Cabin</option>
-                        <option value="Villa">Villa</option>
+                        <option value="house">House</option>
+                        <option value="apartment">Apartment</option>
+                        <option value="cabin">Cabin</option>
+                        <option value="villa">Villa</option>
                     </select>
                 </div>
                 <div className="location">
@@ -158,8 +293,8 @@ function AddPropertyForm() {
                             list="countries"
                             name="country"
                             className="text-input"
-                            value={countryValue}
-                            onChange={countryValueChangeHandler}
+                            value={location.country}
+                            onChange={handleLocationChange}
                         />
                         <datalist id="countries">
                             {countriesWithCities.map((country) => {
@@ -173,8 +308,8 @@ function AddPropertyForm() {
                             list="cities"
                             name="city"
                             className="text-input"
-                            value={cityValue}
-                            onChange={cityValueChangeHandler}
+                            value={location.city}
+                            onChange={handleLocationChange}
                         />
                         <datalist id="cities">
                             {countriesWithCities.map((city) => {
@@ -189,8 +324,8 @@ function AddPropertyForm() {
                         name="address"
                         cols="20"
                         rows="5"
-                        value={addressValue}
-                        onChange={addressValueChangeHandler}
+                        value={location.address}
+                        onChange={handleLocationChange}
                     ></textarea>
                 </div>
                 <div className="date">
@@ -198,18 +333,18 @@ function AddPropertyForm() {
                         <label htmlFor="fromDate">From:</label>
                         <input
                             type="date"
-                            name="fromDate"
-                            value={fromDateValue}
-                            onChange={fromDateValueChangeHandler}
+                            name="startDate"
+                            value={fields.startDate}
+                            onChange={handleFieldsChange}
                         />
                     </div>
                     <div>
                         <label htmlFor="toDate">To:</label>
                         <input
                             type="date"
-                            name="toDate"
-                            value={toDateValue}
-                            onChange={toDateValueChangeHandler}
+                            name="endDate"
+                            value={fields.endDate}
+                            onChange={handleFieldsChange}
                         />
                     </div>
                 </div>
@@ -221,8 +356,8 @@ function AddPropertyForm() {
                                 type="number"
                                 name="guests"
                                 placeholder="0"
-                                value={guestsValue}
-                                onChange={guestsValueChangeHandler}
+                                value={details.guests}
+                                onChange={handleDetailsChange}
                             />
                         </label>
                         <label htmlFor="bedrooms">
@@ -231,8 +366,8 @@ function AddPropertyForm() {
                                 type="number"
                                 name="bedrooms"
                                 placeholder="0"
-                                value={bedroomsValue}
-                                onChange={bedroomsValueChangeHandler}
+                                value={details.bedrooms}
+                                onChange={handleDetailsChange}
                             />
                         </label>
                     </div>
@@ -243,8 +378,8 @@ function AddPropertyForm() {
                                 type="number"
                                 name="beds"
                                 placeholder="0"
-                                value={bedsValue}
-                                onChange={bedsValueChangeHandler}
+                                value={details.beds}
+                                onChange={handleDetailsChange}
                             />
                         </label>
                         <label htmlFor="baths">
@@ -253,16 +388,68 @@ function AddPropertyForm() {
                                 type="number"
                                 name="baths"
                                 placeholder="0"
-                                value={bathsValue}
-                                onChange={bathsValueChangeHandler}
+                                value={details.baths}
+                                onChange={handleDetailsChange}
                             />
                         </label>
                     </div>
                 </div>
-                <button type="submit" className="btn">
+                <div className="offers">
+                    <input
+                        type="checkbox"
+                        name="wifi"
+                        checked={offers.wifi}
+                        onChange={handleOffersChange}
+                    />
+                    <label htmlFor="wifi">Wifi</label>
+                    <input
+                        type="checkbox"
+                        name="kitchen"
+                        checked={offers.kitchen}
+                        onChange={handleOffersChange}
+                    />
+                    <label htmlFor="kitchen">Kitchen</label>
+                    <input
+                        type="checkbox"
+                        name="pets"
+                        checked={offers.pets}
+                        onChange={handleOffersChange}
+                    />
+                    <label htmlFor="pets">Pets</label>
+                    <input
+                        type="checkbox"
+                        name="tv"
+                        checked={offers.tv}
+                        onChange={handleOffersChange}
+                    />
+                    <label htmlFor="tv">TV</label>
+                    <input
+                        type="checkbox"
+                        name="smoke"
+                        checked={offers.smoke}
+                        onChange={handleOffersChange}
+                    />
+                    <label htmlFor="smoke">Smoke</label>
+                    <input
+                        type="checkbox"
+                        name="parking"
+                        checked={offers.parking}
+                        onChange={handleOffersChange}
+                    />
+                    <label htmlFor="parking">Parking</label>
+                    <input
+                        type="checkbox"
+                        name="pool"
+                        checked={offers.pool}
+                        onChange={handleOffersChange}
+                    />
+                    <label htmlFor="pool">Pool</label>
+                </div>
+                <button className="btn" onClick={handleSubmit}>
                     Add your property
                 </button>
-            </form>
+                {error ? <p>Please Fill All inputs</p> : ''}
+            </div>
         </div>
     );
 }

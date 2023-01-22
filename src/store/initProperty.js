@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 
 const initProperty = {
     id: nanoid(),
+    userId: nanoid(),
     title: '',
     type: '',
     price: 0,

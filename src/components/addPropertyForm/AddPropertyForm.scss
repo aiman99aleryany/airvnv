@@ -8,7 +8,8 @@
     font-size: 1rem;
     font-size: 1rem;
     padding: 2% 0;
-    form {
+    color: #ffffff;
+    .form {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -17,8 +18,8 @@
         border: 5px solid #5651e5;
         padding: 1rem;
         border-radius: 30px;
+        background-color: rgba(243, 105, 105, 0.75);
         h1 {
-            color: #5651e5;
         }
         div {
             display: flex;
@@ -154,7 +155,7 @@
 @media only screen and (min-width: 940px) {
     .form-wrapper {
         padding: 3%;
-        form {
+        .form {
             .location {
                 flex-direction: row;
                 gap: 2rem;
