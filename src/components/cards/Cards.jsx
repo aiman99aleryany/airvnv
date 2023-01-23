@@ -14,6 +14,7 @@ function Cards() {
     const filterPropertiesLocation = (props, filters) => {
         const isCountryExist = filters.location.country !== '' ? true : false;
         const isCityExist = filters.location.city !== '' ? true : false;
+
         const isLocationExist = isCountryExist && isCityExist ? true : false;
         if (isLocationExist) {
             return props.filter((property) => {
@@ -22,7 +23,14 @@ function Cards() {
 
                 const searchedCountry = filters.location.country.toLowerCase();
                 const searchedCity = filters.location.city.toLowerCase();
-                return country === searchedCountry && city === searchedCity;
+                return city === searchedCity && country === searchedCountry;
+            });
+        } else if (isCountryExist && !isCityExist) {
+            return props.filter((property) => {
+                const country = property.location.country.toLowerCase();
+
+                const searchedCountry = filters.location.country.toLowerCase();
+                return country === searchedCountry;
             });
         }
         return props;

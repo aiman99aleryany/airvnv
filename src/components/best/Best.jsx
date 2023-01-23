@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Apt1 from '../../assets/apartment1.jpg';
 import Apt2 from '../../assets/apartment2.jpg';
 import Apt3 from '../../assets/apartment3.jpg';
-
+import { motion } from 'framer-motion';
 import './Best.scss';
 
 function Best() {
@@ -24,7 +24,9 @@ function Best() {
                 <img src={Apt3} alt="3" />
             </div>
             <Link to={'/view-all'}>
-                <button className="btn">View All</button>
+                <motion.button className="btn" whileHover={{ scale: 1.1 }}>
+                    View All
+                </motion.button>
             </Link>
         </div>
     );

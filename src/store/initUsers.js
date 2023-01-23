@@ -1,11 +1,11 @@
-import { nanoid } from 'nanoid';
-
 const INIT_USERS = [
-    { id: nanoid(), username: 'Aiman', password: 'aiman99' },
-    { id: nanoid(), username: 'Arya', password: 'arya99' },
-    { id: nanoid(), username: 'Flavius', password: 'flavius96' },
-    { id: nanoid(), username: 'Mikolaj', password: 'mikolaj90' },
-    { id: nanoid(), username: 'Sama', password: 'sama98' },
+    {
+        id: '17',
+        name: 'Aiman',
+        username: 'Aiman99',
+        password: 'aiman99',
+    },
+    { id: '19', name: 'Arya', username: 'Arya99', password: 'arya99' },
 ];
 
 export default INIT_USERS;

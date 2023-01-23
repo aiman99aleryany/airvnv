@@ -5,6 +5,10 @@ import { motion } from 'framer-motion';
 import './Hero.scss';
 
 function Hero() {
+    const handleHeroSubmit = (e) => {
+        e.preventDefault();
+    };
+
     return (
         <motion.div
             className="hero"
@@ -20,13 +24,13 @@ function Hero() {
                     apartments, houses, and properties
                 </p>
 
-                <form className="search">
+                <form className="search" onSubmit={handleHeroSubmit}>
                     <div>
                         <input type="text" placeholder="Enter Keyword.." />
                     </div>
-                    <button type="submit">
+                    <motion.button type="submit" whileHover={{ scale: 1.1 }}>
                         <AiOutlineSearch className="icon" />
-                    </button>
+                    </motion.button>
                 </form>
             </div>
         </motion.div>

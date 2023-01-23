@@ -1,19 +1,19 @@
 import React from 'react';
 import { nanoid } from 'nanoid';
 import useStoreProperties from '../../store/store';
-import useStoreCurrentUser from '../../store/store-currentUser';
 import { motion } from 'framer-motion';
 import Card from '../card/Card';
+import { getLocalStorage } from '../../store/localStorage';
 
 function UserCards() {
     const properties = useStoreProperties((state) => state.properties);
-    const currentUser = useStoreCurrentUser((state) => state.currentUser);
+    const currentUserId = getLocalStorage('currentUserId');
 
     const filterProperties = () => {
-      return properties.filter((property) => {
-        return property.id === currentUser.id
-      })
-    }
+        return properties.filter((property) => {
+            return property.ownerId === currentUserId;
+        });
+    };
 
     return (
         <div className="cards">

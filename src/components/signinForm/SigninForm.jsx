@@ -3,7 +3,7 @@ import useStoreUsers from '../../store/store-users';
 import useStoreCurrentUser from '../../store/store-currentUser';
 import './SigninForm.scss';
 import { setLocalStorage } from '../../store/localStorage';
-
+import { motion } from 'framer-motion';
 function SigninForm() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -34,7 +34,7 @@ function SigninForm() {
 
             if (thisUser.length === 1) {
                 setCurrentUser(thisUser[0]);
-                setLocalStorage('currentUser', thisUser[0].id);
+                setLocalStorage('currentUserId', thisUser[0].id);
                 setLocalStorage('isUserSignedIn', true);
                 window.location.href = '/';
             } else {
@@ -72,10 +72,15 @@ function SigninForm() {
                     placeholder="Password..."
                 />
 
-                <button type="submit" className="btn" onClick={submitUser}>
+                <motion.button
+                    type="submit"
+                    className="btn"
+                    onClick={submitUser}
+                    whileHover={{ scale: 1.1 }}
+                >
                     {' '}
                     Sign in
-                </button>
+                </motion.button>
                 {error && (
                     <p style={{ color: 'red' }}>
                         Username or password are invalid!{' '}
