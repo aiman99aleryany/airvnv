@@ -4,7 +4,7 @@ const setLocalStorage = (KEY, value) => {
     localStorage.setItem(KEY, JSON.stringify(value));
 };
 
-const initLocalStorage = (KEY, value) =>
-    getLocalStorage(KEY) || setLocalStorage(KEY, value);
+const initLocalStorage = (KEY) =>
+    getLocalStorage(KEY) || setLocalStorage(KEY, []);
 
 export { getLocalStorage, setLocalStorage, initLocalStorage };

@@ -8,6 +8,11 @@ const useStoreProperties = create((set) => ({
             properties: [...state.properties, newProperty],
         }));
     },
+    addProperties: (newProperties) => {
+        return set((state) => ({
+            properties: [...state.properties, ...newProperties],
+        }));
+    },
     deleteProperty: (propertyId) => {
         return set((state) => ({
             properties: state.properties.filter(({ id }) => id !== propertyId),

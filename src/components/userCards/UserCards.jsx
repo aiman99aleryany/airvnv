@@ -6,8 +6,12 @@ import Card from '../card/Card';
 import { getLocalStorage } from '../../store/localStorage';
 
 function UserCards() {
-    const properties = useStoreProperties((state) => state.properties);
+    const addProperties = useStoreProperties((state) => state.addProperties);
     const currentUserId = getLocalStorage('currentUserId');
+    const newProperties = getLocalStorage('newProperties');
+
+    addProperties(newProperties);
+    const properties = useStoreProperties((state) => state.properties);
 
     const filterProperties = () => {
         return properties.filter((property) => {
