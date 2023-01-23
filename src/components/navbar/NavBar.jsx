@@ -10,14 +10,16 @@ import { AiFillHome } from 'react-icons/ai';
 import './NavBar.scss';
 
 function NavBar() {
-    const isSignedIn = getLocalStorage('isUserSignedIn');
     const [click, setClick] = useState(false);
+    const isSignedIn = getLocalStorage('isUserSignedIn');
+    const currentUserId = getLocalStorage('currentUserId');
 
     const handleClick = () => setClick((state) => !state);
 
     const signOutBtnHandler = () => {
         window.location.reload();
         setLocalStorage('isUserSignedIn', false);
+        setLocalStorage('currentUserId', null);
     };
 
     const isAddPropertyPage =
@@ -35,8 +37,6 @@ function NavBar() {
             ? true
             : false;
 
-    console.log(isSignInPage);
-
     return (
         <motion.div
             initial={{ x: '-100vh' }}
@@ -45,7 +45,7 @@ function NavBar() {
             className="navbar"
         >
             <div className="container">
-                <h1>
+                <motion.h1 whileHover={{ scale: 1.1 }}>
                     <Link to={'/'}>
                         <span>
                             <BsFillHouseFill />
@@ -53,7 +53,7 @@ function NavBar() {
                         </span>
                         VnV
                     </Link>
-                </h1>
+                </motion.h1>
 
                 <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                     <li>
@@ -64,7 +64,12 @@ function NavBar() {
                     <li>
                         {isSignedIn && !isAddPropertyPage ? (
                             <Link className="addBtn" to={'/add-property'}>
-                                <button className="btn">Add Property</button>
+                                <motion.button
+                                    className="btn"
+                                    whileHover={{ scale: 1.1 }}
+                                >
+                                    Add Property
+                                </motion.button>
                             </Link>
                         ) : null}
                     </li>
@@ -74,33 +79,46 @@ function NavBar() {
                                 className="myPropertiesBtn"
                                 to={'/my-properties'}
                             >
-                                <button className="btn">My Properties</button>
+                                <motion.button
+                                    className="btn"
+                                    whileHover={{ scale: 1.1 }}
+                                >
+                                    My Properties
+                                </motion.button>
                             </Link>
                         ) : null}
                     </li>
                     <li>
                         {isSignedIn && !isMyBookingsPage ? (
-                            <Link
-                                className="myBookingsBtn"
-                                to={'/add-property'}
-                            >
-                                <button className="btn">My Bookings</button>
+                            <Link className="myBookingsBtn" to={`/bookings`}>
+                                <motion.button
+                                    className="btn"
+                                    whileHover={{ scale: 1.1 }}
+                                >
+                                    My Bookings
+                                </motion.button>
                             </Link>
                         ) : null}
                     </li>
                     <li>
                         {isSignInPage ? null : isSignedIn ? (
                             <Link className="signinBtn" to={'/'}>
-                                <button
+                                <motion.button
                                     className="btn"
                                     onClick={signOutBtnHandler}
+                                    whileHover={{ scale: 1.1 }}
                                 >
                                     Sign out
-                                </button>
+                                </motion.button>
                             </Link>
                         ) : (
                             <Link className="signinBtn" to={'/signin'}>
-                                <button className="btn">Sign In</button>
+                                <motion.button
+                                    className="btn"
+                                    whileHover={{ scale: 1.1 }}
+                                >
+                                    Sign In
+                                </motion.button>
                             </Link>
                         )}
                     </li>

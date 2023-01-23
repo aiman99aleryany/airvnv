@@ -5,6 +5,7 @@ import { MdOutlineBedroomParent } from 'react-icons/md';
 import { FaBed, FaBath } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
+import { motion } from 'framer-motion';
 
 import './Card.scss';
 
@@ -20,7 +21,12 @@ function Card(props) {
                 <div className="card-img">
                     <div className="hover">
                         <Link to={`/property/${id}`}>
-                            <button className="btn">View Property</button>
+                            <motion.button
+                                className="btn"
+                                whileHover={{ scale: 1.1 }}
+                            >
+                                View Property
+                            </motion.button>
                         </Link>
                     </div>
                     <div className="rating">

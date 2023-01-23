@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 const INIT_PROPERITES = [
     {
         id: nanoid(),
+        ownerId: '17',
         title: 'Ibiza House',
         type: 'house',
         price: 500,
@@ -36,11 +37,21 @@ const INIT_PROPERITES = [
             pool: true,
             smoke: false,
         },
+        bookings: [
+            {
+                id: '',
+                username: '',
+                name: '',
+                checkIn: '',
+                checkOut: '',
+            },
+        ],
         description:
             'The roof is high, triangular and layered and is covered with grey ceramic tiles. Two small chimneys sit at the side of the house. Several small windows let in just enough light to the rooms below the roof. The house itself is surrounded by a gorgeous garden with many hidden lights that make the garden come to life at night.',
     },
     {
         id: nanoid(),
+        ownerId: '17',
         title: 'Berlin House',
         type: 'house',
         price: 250,
@@ -74,11 +85,21 @@ const INIT_PROPERITES = [
             pool: false,
             smoke: true,
         },
+        bookings: [
+            {
+                id: '',
+                username: '',
+                name: '',
+                checkIn: '',
+                checkOut: '',
+            },
+        ],
         description:
             'From the outside this house looks nice and traditional. It has been built with tan bricks and has spruce wooden decorations. Tall, large windows allow enough light to enter the home and have been added to the house in a very asymmetric way.',
     },
     {
         id: nanoid(),
+        ownerId: '17',
         title: 'New York House',
         type: 'house',
         price: 600,
@@ -112,11 +133,21 @@ const INIT_PROPERITES = [
             pool: true,
             smoke: true,
         },
+        bookings: [
+            {
+                id: '',
+                username: '',
+                name: '',
+                checkIn: '',
+                checkOut: '',
+            },
+        ],
         description:
             'The building is shaped like a T. The two extensions extend into wooden overhanging panels reaching until the end of that side of the house. The second floor is smaller than the first, which, in combination with its placement, creates an original look. This floor has a slightly different style than the floor below.',
     },
     {
         id: nanoid(),
+        ownerId: '19',
         title: 'London house',
         type: 'house',
         price: 300,
@@ -150,11 +181,21 @@ const INIT_PROPERITES = [
             pool: false,
             smoke: false,
         },
+        bookings: [
+            {
+                id: '',
+                username: '',
+                name: '',
+                checkIn: '',
+                checkOut: '',
+            },
+        ],
         description:
             'The building is shaped like a squared S. The two extensions extend into wooden sunscreens structures circling around half the house. The second floor is the same size as the first, which has been built exactly on top of the floor below it. This floor has roughly the same style as the floor below.',
     },
     {
         id: nanoid(),
+        ownerId: '19',
         title: 'Milan House',
         type: 'house',
         price: 350,
@@ -172,7 +213,7 @@ const INIT_PROPERITES = [
         },
         createdAt: Date.now(),
         startDate: '2023/02/4',
-        endDate: '2023/02/6',
+        endDate: '2023/02/16',
         details: {
             guests: 5,
             bedrooms: 5,
@@ -188,11 +229,21 @@ const INIT_PROPERITES = [
             pool: false,
             smoke: true,
         },
+        bookings: [
+            {
+                id: '',
+                username: '',
+                name: '',
+                checkIn: '',
+                checkOut: '',
+            },
+        ],
         description:
             "The roof is high and v-shaped and is covered with dark ceramic tiles. One large chimney sits at the side of the house. There are no windows on the roof. The house itself is surrounded by a modest garden, with mostly grass, a few flower patches and a children's playground.",
     },
     {
         id: nanoid(),
+        ownerId: '19',
         title: 'Melbourne house',
         type: 'house',
         price: 730,
@@ -226,11 +277,21 @@ const INIT_PROPERITES = [
             pool: true,
             smoke: true,
         },
+        bookings: [
+            {
+                id: '',
+                username: '',
+                name: '',
+                checkIn: '',
+                checkOut: '',
+            },
+        ],
         description:
             'The building is square shaped. The house is partially surrounded by stylish gardens on two sides. The second floor is smaller than the first, which allowed for several small balconies on one side of the house. This floor follows the same style as the floor below.',
     },
     {
         id: nanoid(),
+        ownerId: '19',
         title: 'Palermo flat',
         type: 'flat',
         price: 120,
@@ -264,11 +325,21 @@ const INIT_PROPERITES = [
             pool: false,
             smoke: false,
         },
+        bookings: [
+            {
+                id: '17',
+                username: '',
+                name: '',
+                checkIn: '',
+                checkOut: '',
+            },
+        ],
         description:
             'The building is shaped like a squared S. The two extensions extend into overgrown wooden overhanging panels to each side. The second floor is bigger than the first, which creates a stylish overhang around half the house. This floor follows the same style as the floor below.',
     },
     {
         id: nanoid(),
+        ownerId: '17',
         title: 'Romania cabin',
         type: 'cabin',
         price: 40,
@@ -302,6 +373,15 @@ const INIT_PROPERITES = [
             pool: false,
             smoke: true,
         },
+        bookings: [
+            {
+                id: '',
+                username: '',
+                name: '',
+                checkIn: '',
+                checkOut: '',
+            },
+        ],
         description:
             'The cabin is equipped with a modern kitchen and one large bathroom, it also has a fairly small living room, four bedrooms, a grand dining room, an office and a modest basement.',
     },

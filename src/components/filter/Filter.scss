@@ -1,8 +1,299 @@
+.showFilters {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.filter-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .filter {
-    .icon {
-        border: 1px solid #5651e5;
-        color: white;
-        background-image: linear-gradient(45deg, #5651e5 0%, #709dff 100%);
-        cursor: pointer;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 90%;
+    border-radius: 3rem;
+    background: linear-gradient(-45deg, #5651e5, #3630eb, #b8b7d3, #4f4e72);
+    background-size: 400% 400%;
+    animation: gradient 20s ease infinite;
+    padding: 1rem;
+    &-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+        border-radius: 2rem;
+        background-color: #fff;
+        box-shadow: 0 1px 10px 1px grey;
+    }
+
+    &-input {
+        font-size: 16px;
+        border-width: 2px;
+        border-color: #5651e5;
+        background-color: #ffffff;
+        color: #000000;
+        border-radius: 9px;
+
+        &:focus {
+            outline: none;
+            border-color: #00b4e8;
+            box-shadow: 0px 0px 5px rgba(86, 81, 229, 0.75);
+        }
+    }
+
+    &-location {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        height: fit-content;
+    }
+
+    &-country {
+        width: 70%;
+        max-width: 70%;
+        position: relative;
+        .filter-input {
+            width: 100%;
+            font-weight: 600;
+            font-size: 1.1rem;
+            padding: 0.7rem 1rem;
+        }
+
+        &-dropdown {
+            position: absolute;
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            z-index: 10;
+            font-size: 16px;
+            border-width: 2px;
+            border-color: #5651e5;
+            background-color: #ffffff;
+            color: #000000;
+            border-radius: 0 0 9px 9px;
+            li {
+                padding: 1rem;
+                font-weight: 700;
+                cursor: pointer;
+                font-size: 16px;
+                border-bottom: 2px solid #00b4e8;
+                background-color: #ffffff;
+                color: #333;
+            }
+        }
+    }
+
+    &-city {
+        width: 70%;
+        max-width: 70%;
+        position: relative;
+        .filter-input {
+            width: 100%;
+            padding: 0.7rem 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        &-dropdown {
+            position: absolute;
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            z-index: 10;
+            font-size: 16px;
+            border-width: 2px;
+            border-color: #5651e5;
+            background-color: #ffffff;
+            color: #000000;
+            border-radius: 0 0 9px 9px;
+            li {
+                padding: 1rem;
+                font-weight: 700;
+                cursor: pointer;
+                font-size: 16px;
+                border-bottom: 2px solid #00b4e8;
+                background-color: #ffffff;
+                color: #333;
+            }
+        }
+    }
+
+    &-more-location {
+        display: flex;
+        flex-direction: column;
+        .btn {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+    }
+
+    &-more-dates {
+        display: flex;
+        flex-direction: column;
+
+        .btn {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+    }
+
+    &-more-details {
+        display: flex;
+        flex-direction: column;
+
+        .btn {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+    }
+
+    &-dates {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &-startDate {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        label {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .filter-input {
+            padding: 0.4rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            width: 100%;
+        }
+    }
+
+    &-endDate {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        label {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+        .filter-input {
+            padding: 0.4rem;
+            width: 100%;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+    }
+
+    &-details {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    &-guests {
+        display: flex;
+        justify-content: space-between;
+
+        label {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .filter-input {
+            padding: 0.4rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+    }
+
+    &-bedrooms {
+        display: flex;
+        justify-content: space-between;
+        label {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .filter-input {
+            padding: 0.4rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+    }
+
+    &-beds {
+        display: flex;
+        justify-content: space-between;
+        label {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .filter-input {
+            padding: 0.4rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+    }
+
+    &-baths {
+        display: flex;
+        justify-content: space-between;
+        label {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .filter-input {
+            padding: 0.4rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+    }
+
+    &-submit {
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+}
+
+@media only screen and (min-width: 940px) {
+    .filter {
+        &-content {
+            max-width: 70%;
+            padding: 2rem;
+        }
+    }
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
     }
 }
