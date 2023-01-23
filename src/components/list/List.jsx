@@ -44,7 +44,6 @@ function List(props) {
     const isUserSignedIn = getLocalStorage('isUserSignedIn');
     const currentUserId = getLocalStorage('currentUserId');
     const editProperty = useStoreProperties((state) => state.editProperty);
-    const editUser = useStoreUsers((state) => state.editUser);
     const users = useStoreUsers((state) => state.users);
     const currentUser = users.filter((user) => {
         return String(user.id) === String(currentUserId);
@@ -66,14 +65,6 @@ function List(props) {
             setIsAbleToBook(true);
         }
     }, [property.startDate, property.endDate, bookStartDate, bookEndDate]);
-
-    useEffect(() => {
-        for (let i = 0; i < currentUser.bookings.length; i++) {
-            if (property.id === currentUser.bookings[i].id) {
-                setIsBooked(true);
-            }
-        }
-    }, [property, currentUser]);
 
     const incrementImageIndex = () => {
         if (imageIndex >= imagesArray.length - 1) return;
@@ -325,6 +316,8 @@ function List(props) {
                         </li>
                     </ul>
                 </div>
+
+                {isUserSignedIn ? null : <p>Sign in to book This Property</p>}
                 {isUserSignedIn &&
                     currentUserId !== property.ownerId &&
                     !isBooked && (

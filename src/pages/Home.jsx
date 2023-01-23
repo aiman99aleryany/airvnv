@@ -8,12 +8,12 @@ import Footer from '../components/footer/Footer';
 function Home() {
     return (
         <div>
-            <ScrollRestoration />
             <NavBar />
             <Hero />
             <Best />
             <Featured />
             <Footer />
+            <ScrollRestoration />
         </div>
     );
 }

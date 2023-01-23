@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import useStoreUsers from '../../store/store-users';
-import useStoreCurrentUser from '../../store/store-currentUser';
 import './SigninForm.scss';
 import { setLocalStorage } from '../../store/localStorage';
 import { motion } from 'framer-motion';
@@ -9,9 +8,6 @@ function SigninForm() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
     const users = useStoreUsers((state) => state.users);
-    const setCurrentUser = useStoreCurrentUser((state) => state.setCurrentUser);
-
-    const currentUser = useStoreCurrentUser((state) => state.currentUser);
 
     const usernameChangeHandler = (e) => {
         setUsername(e.target.value);
@@ -33,7 +29,6 @@ function SigninForm() {
             });
 
             if (thisUser.length === 1) {
-                setCurrentUser(thisUser[0]);
                 setLocalStorage('currentUserId', thisUser[0].id);
                 setLocalStorage('isUserSignedIn', true);
                 window.location.href = '/';
@@ -44,8 +39,6 @@ function SigninForm() {
 
         return;
     };
-
-    console.log(currentUser);
 
     return (
         <div className="form-wrapper">
