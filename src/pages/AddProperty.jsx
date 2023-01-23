@@ -3,6 +3,7 @@ import AddPropertyForm from '../components/addPropertyForm/AddPropertyFrom';
 import NavBar from '../components/navbar/NavBar';
 import { Link, ScrollRestoration } from 'react-router-dom';
 import { getLocalStorage } from '../store/localStorage';
+import NoPage from '../components/noPage/NoPage';
 
 function AddProperty() {
     const isUserSignIn = getLocalStorage('isUserSignedIn');
@@ -10,13 +11,7 @@ function AddProperty() {
         <div>
             <ScrollRestoration />
             <NavBar />
-            {isUserSignIn ? (
-                <AddPropertyForm />
-            ) : (
-                <Link to={'/signin'}>
-                    <button className="btn">Sign in to add property</button>
-                </Link>
-            )}
+            {isUserSignIn ? <AddPropertyForm /> : <NoPage />}
         </div>
     );
 }

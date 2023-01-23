@@ -1,8 +1,9 @@
 import { nanoid } from 'nanoid';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fromUnix } from '../../store/unixTime';
 import { AiFillStar } from 'react-icons/ai';
 import { FiUser } from 'react-icons/fi';
+import { getLocalStorage, setLocalStorage } from '../../store/localStorage';
 import {
     MdOutlineBedroomParent,
     MdOutlineMonitor,
@@ -17,19 +18,62 @@ import {
     FaSwimmingPool,
 } from 'react-icons/fa';
 import { TbToolsKitchen2 } from 'react-icons/tb';
+import { Link } from 'react-router-dom';
+import { toUnix } from '../../store/unixTime';
+import useStoreProperties from '../../store/store';
+import useStoreUsers from '../../store/store-users';
 
 import './List.scss';
 
 function List(props) {
     const [imageIndex, setImageIndex] = useState(0);
+    const [bookStartDate, setBookStartDate] = useState('');
+    const [bookEndDate, setBookEndDate] = useState('');
+    const [startDateError, setStartDateError] = useState(false);
+    const [endDateError, setEndDateError] = useState(false);
+    const [isAbleToBook, setIsAbleToBook] = useState(false);
+    const [isBookingRejection, setIsBookingRejection] = useState(false);
+    const [isBooked, setIsBooked] = useState(false);
 
-    const { property } = props;
-    const { title, type, description, location, rating, images } = property;
-    const { price, startDate, endDate, details, offers, createdAt } = property;
-    const { country, city } = location;
-    const { guests, bedrooms, beds, baths } = details;
-    const { wifi, kitchen, parking, pets, tv, pool, smoke } = offers;
-    const imagesArray = Object.values(images);
+    const property = props.property || getLocalStorage('currentProperty');
+
+    if (property) {
+        setLocalStorage('currentProperty', property);
+    }
+
+    const isUserSignedIn = getLocalStorage('isUserSignedIn');
+    const currentUserId = getLocalStorage('currentUserId');
+    const editProperty = useStoreProperties((state) => state.editProperty);
+    const editUser = useStoreUsers((state) => state.editUser);
+    const users = useStoreUsers((state) => state.users);
+    const currentUser = users.filter((user) => {
+        return String(user.id) === String(currentUserId);
+    })[0];
+    const imagesArray = Object.values(property.images);
+
+    useEffect(() => {
+        const unixStartDate = toUnix(property.startDate);
+        const unixEndDate = toUnix(property.endDate);
+        const unixBookStartDate = toUnix(bookStartDate);
+        const unixBookEndDate = toUnix(bookEndDate);
+
+        if (
+            unixBookStartDate >= unixStartDate &&
+            unixBookStartDate < unixEndDate &&
+            unixBookEndDate <= unixEndDate &&
+            unixBookEndDate > unixStartDate
+        ) {
+            setIsAbleToBook(true);
+        }
+    }, [property.startDate, property.endDate, bookStartDate, bookEndDate]);
+
+    useEffect(() => {
+        for (let i = 0; i < currentUser.bookings.length; i++) {
+            if (property.id === currentUser.bookings[i].id) {
+                setIsBooked(true);
+            }
+        }
+    }, [property, currentUser]);
 
     const incrementImageIndex = () => {
         if (imageIndex >= imagesArray.length - 1) return;
@@ -39,6 +83,60 @@ function List(props) {
     const decrementImageIndex = () => {
         if (imageIndex <= 0) return;
         setImageIndex((state) => state - 1);
+    };
+
+    const handleBookStartDateChange = (e) => {
+        const unixInputDate = toUnix(e.target.value);
+        const unixPropertyStartDate = toUnix(property.startDate);
+        const unixPropertyEndDate = toUnix(property.endDate);
+
+        if (
+            unixInputDate >= unixPropertyStartDate &&
+            unixInputDate < unixPropertyEndDate
+        ) {
+            setBookStartDate(e.target.value);
+            setStartDateError(false);
+        } else {
+            setStartDateError(true);
+            setIsAbleToBook(false);
+        }
+    };
+
+    const handleBookEndDateChange = (e) => {
+        const unixInputDate = toUnix(e.target.value);
+        const unixPropertyStartDate = toUnix(property.startDate);
+        const unixPropertyEndDate = toUnix(property.endDate);
+
+        if (
+            unixInputDate <= unixPropertyEndDate &&
+            unixInputDate > unixPropertyStartDate
+        ) {
+            setBookEndDate(e.target.value);
+            setEndDateError(false);
+        } else {
+            setEndDateError(true);
+            setIsAbleToBook(false);
+        }
+    };
+
+    const showRejection = () => {
+        setIsBookingRejection(true);
+    };
+
+    const bookListing = () => {
+        const propertyNewBooking = {
+            bookings: [
+                {
+                    id: currentUser.id,
+                    username: currentUser.username,
+                    name: currentUser.name,
+                    checkIn: bookStartDate,
+                    checkOut: bookEndDate,
+                },
+            ],
+        };
+
+        editProperty(property.id, propertyNewBooking);
     };
 
     return (
@@ -53,21 +151,21 @@ function List(props) {
 
                 <div className="list-factors">
                     <div className="list-rating">
-                        <span>{rating}</span>
+                        <span>{property.rating}</span>
                         <AiFillStar className="icon" />
                     </div>
 
                     <div className="list-title">
-                        <h3>{title}</h3>
+                        <h3>{property.title}</h3>
                     </div>
 
                     <div className="list-postedOn">
-                        <h4>Posted on: {fromUnix(createdAt)}</h4>
+                        <h4>Posted on: {fromUnix(property.createdAt)}</h4>
                     </div>
 
                     <div className="list-type">
                         <span>Type: </span>
-                        <h4>{type}</h4>
+                        <h4>{property.type}</h4>
                     </div>
                 </div>
 
@@ -103,34 +201,34 @@ function List(props) {
                 </div>
 
                 <div className="list-price">
-                    <span>${price}/Night</span>
+                    <span>${property.price}/Night</span>
                 </div>
 
                 <div className="list-location">
                     <h3>Location</h3>
                     <div>
                         <h4>
-                            Country: <span>{country}</span>{' '}
+                            Country: <span>{property.location.country}</span>{' '}
                         </h4>
                         <h4>
-                            City: <span>{city}</span>{' '}
+                            City: <span>{property.location.city}</span>{' '}
                         </h4>
                     </div>
                 </div>
 
                 <div className="list-description">
                     <span>About the Property</span>
-                    <p>{description}</p>
+                    <p>{property.description}</p>
                 </div>
                 <div className="list-date">
                     <div className="list-startDate">
                         <span>Available From</span>
-                        <time>{startDate}</time>
+                        <time>{property.startDate}</time>
                     </div>
 
                     <div className="list-endDate">
                         <span>To</span>
-                        <time>{endDate}</time>
+                        <time>{property.endDate}</time>
                     </div>
                 </div>
 
@@ -140,19 +238,21 @@ function List(props) {
                         <li>
                             <FiUser className="icon" />
                             Guests:
-                            <span>{guests}</span>
+                            <span>{property.details.guests}</span>
                         </li>
                         <li>
                             <MdOutlineBedroomParent className="icon" />
-                            Bedrooms: <span>{bedrooms}</span>{' '}
+                            Bedrooms: <span>
+                                {property.details.bedrooms}
+                            </span>{' '}
                         </li>
                         <li>
                             <FaBed className="icon" />
-                            Beds: <span> {beds}</span>{' '}
+                            Beds: <span> {property.details.beds}</span>{' '}
                         </li>
                         <li>
                             <FaBath className="icon" />
-                            Baths: <span>{baths}</span>
+                            Baths: <span>{property.details.baths}</span>
                         </li>
                     </ul>
                 </div>
@@ -162,36 +262,121 @@ function List(props) {
                     <ul>
                         <li>
                             <FaWifi className="icon" />
-                            Wifi: {wifi ? <span>Yes</span> : <span>no</span>}
+                            Wifi:{' '}
+                            {property.offers.wifi ? (
+                                <span>Yes</span>
+                            ) : (
+                                <span>no</span>
+                            )}
                         </li>
                         <li>
                             <TbToolsKitchen2 className="icon" />
                             Kitchen:{' '}
-                            {kitchen ? <span>Yes</span> : <span>no</span>}
+                            {property.offers.kitchen ? (
+                                <span>Yes</span>
+                            ) : (
+                                <span>no</span>
+                            )}
                         </li>
                         <li>
                             <MdOutlineMonitor className="icon" />
-                            TV: {tv ? <span>Yes</span> : <span>no</span>}
+                            TV:{' '}
+                            {property.offers.tv ? (
+                                <span>Yes</span>
+                            ) : (
+                                <span>no</span>
+                            )}
                         </li>
                         <li>
                             <MdPets className="icon" />
-                            Pets: {pets ? <span>Yes</span> : <span>no</span>}
+                            Pets:{' '}
+                            {property.offers.pets ? (
+                                <span>Yes</span>
+                            ) : (
+                                <span>no</span>
+                            )}
                         </li>
                         <li>
                             <FaSmoking className="icon" />
                             Smoking:{' '}
-                            {smoke ? <span>Yes</span> : <span>no</span>}
+                            {property.offers.smoke ? (
+                                <span>Yes</span>
+                            ) : (
+                                <span>no</span>
+                            )}
                         </li>
                         <li>
                             <MdLocalParking className="icon" />
                             Parking:{' '}
-                            {parking ? <span>Yes</span> : <span>no</span>}
+                            {property.offers.sparking ? (
+                                <span>Yes</span>
+                            ) : (
+                                <span>no</span>
+                            )}
                         </li>
                         <li>
                             <FaSwimmingPool className="icon" />
-                            Pool: {pool ? <span>Yes</span> : <span>no</span>}
+                            Pool:{' '}
+                            {property.offers.pool ? (
+                                <span>Yes</span>
+                            ) : (
+                                <span>no</span>
+                            )}
                         </li>
                     </ul>
+                </div>
+                {isUserSignedIn &&
+                    currentUserId !== property.ownerId &&
+                    !isBooked && (
+                        <div className="list-input">
+                            <label htmlFor="startDate">check in: </label>
+                            <input
+                                name="startDate"
+                                type="date"
+                                value={bookStartDate}
+                                onChange={handleBookStartDateChange}
+                            />
+                            {startDateError && (
+                                <p>Please Select a valid check in Date</p>
+                            )}
+                            <label htmlFor="endDate">check out:</label>
+                            <input
+                                name="endDate"
+                                type="date"
+                                value={bookEndDate}
+                                onChange={handleBookEndDateChange}
+                            />
+                            {endDateError && (
+                                <p>Please Select a valid check out Date</p>
+                            )}
+                        </div>
+                    )}
+                <div className="list-bookBtn">
+                    {isUserSignedIn &&
+                    currentUserId !== property.ownerId &&
+                    !isBooked ? (
+                        isAbleToBook ? (
+                            <div>
+                                <Link to={'/bookings'}>
+                                    <button
+                                        className="btn"
+                                        onClick={bookListing}
+                                    >
+                                        Book
+                                    </button>
+                                </Link>
+                            </div>
+                        ) : (
+                            <div>
+                                <button className="btn" onClick={showRejection}>
+                                    Book
+                                </button>
+                                {isBookingRejection ? (
+                                    <p>Please Enter Valid Dates</p>
+                                ) : null}
+                            </div>
+                        )
+                    ) : null}
                 </div>
             </div>
         </div>
