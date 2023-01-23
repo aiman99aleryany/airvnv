@@ -4,10 +4,8 @@ import Hero from '../components/hero/Hero';
 import Best from '../components/best/Best';
 import Featured from '../components/featured/Featured';
 import { ScrollRestoration } from 'react-router-dom';
-import useStoreCurrentUser from '../store/store-currentUser';
+import Footer from '../components/footer/Footer';
 function Home() {
-    const currentUser = useStoreCurrentUser((state) => state.currentUser);
-    console.log(currentUser);
     return (
         <div>
             <ScrollRestoration />
@@ -15,6 +13,7 @@ function Home() {
             <Hero />
             <Best />
             <Featured />
+            <Footer />
         </div>
     );
 }

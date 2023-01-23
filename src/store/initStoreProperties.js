@@ -146,7 +146,7 @@ const INIT_PROPERITES = [
             'The building is shaped like a T. The two extensions extend into wooden overhanging panels reaching until the end of that side of the house. The second floor is smaller than the first, which, in combination with its placement, creates an original look. This floor has a slightly different style than the floor below.',
     },
     {
-        id: nanoid(),
+        id: '69',
         ownerId: '19',
         title: 'London house',
         type: 'house',

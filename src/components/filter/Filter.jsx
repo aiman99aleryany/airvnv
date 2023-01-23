@@ -68,6 +68,12 @@ function Filter() {
         const name = e.target.name;
         const value = e.target.value;
 
+        if (name === 'country') {
+            countryDropdownRef.current.style.display = 'flex';
+        } else if (name === 'city') {
+            cityDropdownRef.current.style.display = 'flex';
+        }
+
         setLocation((state) => ({
             ...state,
             [name]: value,

@@ -1,16 +1,6 @@
 import { create } from 'zustand';
 import { INIT_PROPERITES } from './initStoreProperties';
 
-// price convert
-// const convertPrice = (priceInUSD, option)  => {
-//     const CURRENCIES = {
-//         TUR: 18.5,
-//         RON: 4.6,
-//     }
-
-//     return CURRENCIES[option] * priceInUSD
-// }
-
 const useStoreProperties = create((set) => ({
     properties: INIT_PROPERITES,
     addProperty: (newProperty) => {

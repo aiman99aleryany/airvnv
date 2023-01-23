@@ -2,6 +2,9 @@
     display: flex;
     justify-content: center;
     padding: 2rem 1rem;
+    position: relative;
+    overflow: hidden;
+
     &-content {
         display: flex;
         flex-direction: column;

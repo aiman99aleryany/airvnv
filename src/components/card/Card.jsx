@@ -11,9 +11,11 @@ import './Card.scss';
 
 function Card(props) {
     const { property } = props;
-    const { id, title, price, rating, details, images, description } = property;
+    const { id, title, price, rating, details, images, description, location } =
+        property;
     const { first } = images;
     const { guests, bedrooms, beds, baths } = details;
+    const { country, city } = location;
 
     return (
         <div className="card">
@@ -25,7 +27,7 @@ function Card(props) {
                                 className="btn"
                                 whileHover={{ scale: 1.1 }}
                             >
-                                View Property
+                                View Listing
                             </motion.button>
                         </Link>
                     </div>
@@ -33,10 +35,12 @@ function Card(props) {
                         <span>{rating}</span>
                         <AiFillStar className="icon" />
                     </div>
+
                     <img src={first} alt="house1" />
                 </div>
                 <div className="card-title">
                     <h3>{title}</h3>
+                    <dir className="city">{city}</dir>
                 </div>
                 <div className="card-description">
                     <p>{description}</p>

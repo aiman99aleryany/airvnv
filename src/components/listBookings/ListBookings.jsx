@@ -4,10 +4,12 @@ import { motion } from 'framer-motion';
 import useStoreProperties from '../../store/store';
 import { nanoid } from 'nanoid';
 import { getLocalStorage } from '../../store/localStorage';
+import useStoreUsers from '../../store/store-users';
 
 function ListBookings() {
     const currentUserId = getLocalStorage('currentUserId');
     const properties = useStoreProperties((state) => state.properties);
+    const users = useStoreUsers((state) => state.users);
 
     return (
         <div className="cards">
@@ -15,7 +17,7 @@ function ListBookings() {
                 {properties
                     .filter((property) => {
                         for (let i = 0; i < property.bookings.length; i++) {
-                            if (property.bookings[i].id === currentUserId) {
+                            if (property.bookings[0].id === currentUserId) {
                                 return true;
                             }
                         }
