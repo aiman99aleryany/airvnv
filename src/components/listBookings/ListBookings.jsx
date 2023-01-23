@@ -4,12 +4,21 @@ import { motion } from 'framer-motion';
 import useStoreProperties from '../../store/store';
 import { nanoid } from 'nanoid';
 import { getLocalStorage } from '../../store/localStorage';
-import useStoreUsers from '../../store/store-users';
 
 function ListBookings() {
     const currentUserId = getLocalStorage('currentUserId');
     const properties = useStoreProperties((state) => state.properties);
-    const users = useStoreUsers((state) => state.users);
+    const editProperty = useStoreProperties((state) => state.editProperty);
+
+    const cancelBooking = (p) => {
+        const newBookings = p.bookings.filter((booking) => {
+            return booking.id !== currentUserId;
+        });
+
+        editProperty(p.id, { bookings: newBookings });
+    };
+
+    const changeDate = (p) => {};
 
     return (
         <div className="cards">
@@ -36,6 +45,20 @@ function ListBookings() {
                                 key={nanoid()}
                             >
                                 <Card property={property} />
+                                <motion.button
+                                    className="btn"
+                                    whileHover={{ scale: 1.1 }}
+                                    onClick={() => cancelBooking(property)}
+                                >
+                                    Cancel Booking
+                                </motion.button>
+                                <motion.button
+                                    className="btn"
+                                    whileHover={{ scale: 1.1 }}
+                                    onClick={() => changeDate(property)}
+                                >
+                                    Change Date
+                                </motion.button>
                             </motion.div>
                         );
                     })}
