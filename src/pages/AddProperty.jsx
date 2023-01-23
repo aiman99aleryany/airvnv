@@ -1,7 +1,7 @@
 import React from 'react';
-import AddPropertyForm from '../components/addPropertyForm/AddPropertyFrom';
+import AddPropertyForm from '../components/addPropertyForm/AddPropertyForm';
 import NavBar from '../components/navbar/NavBar';
-import { Link, ScrollRestoration } from 'react-router-dom';
+import { ScrollRestoration } from 'react-router-dom';
 import { getLocalStorage } from '../store/localStorage';
 import NoPage from '../components/noPage/NoPage';
 

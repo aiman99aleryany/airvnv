@@ -4,18 +4,31 @@ import { motion } from 'framer-motion';
 import useStoreProperties from '../../store/store';
 import { nanoid } from 'nanoid';
 import { getLocalStorage } from '../../store/localStorage';
+import useStoreUsers from '../../store/store-users';
 
 function ListBookings() {
-    const currentUserId = getLocalStorage('currentUserId');
+    const currentUserIdInLocal = getLocalStorage('currentUserId');
+
+    const users = useStoreUsers((state) => state.users);
+    // getting the current user by filtering from zustand
+    const currentUser = users.filter((user) => {
+        return currentUserIdInLocal === user.id;
+    })[0];
+
+    // to edit the user bookings, by deleting or editing
+    const editUser = useStoreUsers((state) => state.editUser);
+
+    // to remove the booking from the property as well
     const properties = useStoreProperties((state) => state.properties);
     const editProperty = useStoreProperties((state) => state.editProperty);
 
     const cancelBooking = (p) => {
         const newBookings = p.bookings.filter((booking) => {
-            return booking.id !== currentUserId;
+            return booking.id !== currentUserIdInLocal;
         });
 
         editProperty(p.id, { bookings: newBookings });
+        // editUser();
     };
 
     const changeDate = (p) => {};
@@ -26,7 +39,9 @@ function ListBookings() {
                 {properties
                     .filter((property) => {
                         for (let i = 0; i < property.bookings.length; i++) {
-                            if (property.bookings[0].id === currentUserId) {
+                            if (
+                                property.bookings[0].id === currentUserIdInLocal
+                            ) {
                                 return true;
                             }
                         }

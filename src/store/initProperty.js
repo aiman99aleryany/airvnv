@@ -1,13 +1,14 @@
 import { nanoid } from 'nanoid';
+import { getLocalStorage } from './localStorage';
 
+const currentUserId = getLocalStorage('currentUserId');
 const initProperty = {
     id: nanoid(),
-    userId: nanoid(),
+    ownerId: currentUserId,
     title: '',
     type: '',
-    price: 0,
+    price: null,
     location: {
-        address: '',
         city: '',
         country: '',
     },
@@ -23,10 +24,10 @@ const initProperty = {
     startDate: '',
     endDate: '',
     details: {
-        guests: 0,
-        bedrooms: 0,
-        beds: 0,
-        baths: 0,
+        guests: null,
+        bedrooms: null,
+        beds: null,
+        baths: null,
     },
     offers: {
         wifi: false,
