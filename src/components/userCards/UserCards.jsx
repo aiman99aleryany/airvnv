@@ -5,12 +5,11 @@ import { motion } from 'framer-motion';
 import Card from '../card/Card';
 import { getLocalStorage } from '../../store/localStorage';
 
-function UserCards() {
-    const addProperties = useStoreProperties((state) => state.addProperties);
-    const currentUserId = getLocalStorage('currentUserId');
-    const newProperties = getLocalStorage('newProperties');
+import './UserCards.scss';
 
-    addProperties(newProperties);
+function UserCards() {
+    const currentUserId = getLocalStorage('currentUserId');
+
     const properties = useStoreProperties((state) => state.properties);
 
     const filterProperties = () => {
@@ -20,18 +19,36 @@ function UserCards() {
     };
 
     return (
-        <div className="cards">
-            <div className="cards-content">
-                {filterProperties().map((property) => (
-                    <motion.div
-                        initial={{ y: 1000 }}
-                        animate={{ y: 0 }}
-                        transition={{ type: 'twin', duration: 1, delay: 0.1 }}
-                        key={nanoid()}
-                    >
-                        <Card property={property} />
-                    </motion.div>
-                ))}
+        <div>
+            <motion.div
+                initial={{ x: -1000 }}
+                animate={{ x: 0 }}
+                transition={{ type: 'twin', duration: 1, delay: 0.6 }}
+                className="usercards-header"
+            >
+                <h1>
+                    {' '}
+                    <span> My</span> Properties
+                </h1>
+            </motion.div>
+
+            <div className="cards">
+                <div className="cards-content">
+                    {filterProperties().map((property) => (
+                        <motion.div
+                            initial={{ y: 1000 }}
+                            animate={{ y: 0 }}
+                            transition={{
+                                type: 'twin',
+                                duration: 1,
+                                delay: 0.1,
+                            }}
+                            key={nanoid()}
+                        >
+                            <Card property={property} />
+                        </motion.div>
+                    ))}
+                </div>
             </div>
         </div>
     );

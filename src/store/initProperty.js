@@ -24,10 +24,10 @@ const initProperty = {
     startDate: '',
     endDate: '',
     details: {
-        guests: null,
-        bedrooms: null,
-        beds: null,
-        baths: null,
+        guests: 0,
+        bedrooms: 0,
+        beds: 0,
+        baths: 0,
     },
     offers: {
         wifi: false,
@@ -38,6 +38,7 @@ const initProperty = {
         pool: false,
         smoke: false,
     },
+    bookings: [],
     description: '',
 };
 

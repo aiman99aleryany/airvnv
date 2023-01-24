@@ -8,7 +8,13 @@ import './Best.scss';
 
 function Best() {
     return (
-        <div className="best">
+        <motion.div
+            initial={{ x: 1000 }}
+            whileInView={{ x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="best"
+        >
             <h1>Find best Rated properties</h1>
             <div>
                 <p>
@@ -28,7 +34,7 @@ function Best() {
                     View All
                 </motion.button>
             </Link>
-        </div>
+        </motion.div>
     );
 }
 

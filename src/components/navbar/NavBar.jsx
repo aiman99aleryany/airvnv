@@ -29,11 +29,11 @@ function NavBar() {
     const isSignInPage =
         window.location.href === 'http://localhost:3000/signin' ? true : false;
     const isMyBookingsPage =
-        window.location.href === 'http://localhost:3000/my-bookings'
+        window.location.href === 'http://localhost:3000/bookings'
             ? true
             : false;
     const isMyPropertiesPage =
-        window.location.href === '/http://localhost:3000/my-properties'
+        window.location.href === 'http://localhost:3000/my-properties'
             ? true
             : false;
 

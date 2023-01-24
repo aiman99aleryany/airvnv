@@ -5,15 +5,11 @@ import useStoreProperties from '../../store/store';
 import initProperty from '../../store/initProperty';
 import { motion } from 'framer-motion';
 import { nanoid } from 'nanoid';
-import {
-    initLocalStorage,
-    setLocalStorage,
-    getLocalStorage,
-} from '../../store/localStorage';
+import { Link } from 'react-router-dom';
+
 import './AddPropertyForm.scss';
 
 function AddPropertyForm() {
-    initLocalStorage('newProperties');
     // -------------------------States--------------------------------
     const [fields, setFields] = useState(initProperty);
     const [location, setLocation] = useState(initProperty.location);
@@ -136,7 +132,7 @@ function AddPropertyForm() {
 
     const handleImagesChange = (e) => {
         const name = e.target.name;
-        const file = e.target.files[0];
+        const file = URL.createObjectURL(e.target.files[0]);
         setImages((state) => ({
             ...state,
             [name]: file,
@@ -176,46 +172,40 @@ function AddPropertyForm() {
 
     //------------------------------------------------------------------------------
 
-    // save images in localStorage
+    const isImagesExist =
+        images.first &&
+        images.second &&
+        images.third &&
+        images.forth &&
+        images.fifth
+            ? true
+            : false;
+    const isTitleExist = fields.title ? true : false;
+    const isTypeExist = fields.type ? true : false;
+    const isPriceExist = fields.price ? true : false;
+    const isDescriptionExist = fields.description ? true : false;
+    const isLocationExist = location.city && location.country ? true : false;
+    const isDetailsExist = details.guests ? true : false;
+
+    const isFieldsExist =
+        isImagesExist &&
+        isTitleExist &&
+        isTypeExist &&
+        isPriceExist &&
+        isDescriptionExist &&
+        isLocationExist &&
+        isDetailsExist
+            ? true
+            : false;
 
     //------------------------------------------------------------------------------------------------
     const handleSubmit = () => {
-        const isImagesExist =
-            images.first &&
-            images.second &&
-            images.third &&
-            images.forth &&
-            images.fifth
-                ? true
-                : false;
-        const isTitleExist = fields.title ? true : false;
-        const isTypeExist = fields.type ? true : false;
-        const isPriceExist = fields.price ? true : false;
-        const isDescriptionExist = fields.description ? true : false;
-        const isLocationExist =
-            location.city && location.country ? true : false;
-        const isDetailsExist = details.guests ? true : false;
-
-        const isFieldsExist =
-            isImagesExist &&
-            isTitleExist &&
-            isTypeExist &&
-            isPriceExist &&
-            isDescriptionExist &&
-            isLocationExist &&
-            isDetailsExist
-                ? true
-                : false;
-
         if (isFieldsExist) {
             addProperty(fields);
-            console.log(fields);
-            const newProperties = getLocalStorage('newProperties');
-            setLocalStorage('newProperties', [...newProperties, fields]);
+            setError(false);
         } else {
             setError(true);
         }
-
         return;
     };
 
@@ -257,17 +247,19 @@ function AddPropertyForm() {
     //-------------------------Renders Component ------------------------------------------------
     return (
         <div className="addpropertyform-wrapper">
-            <motion.div
-                initial={{ x: -1000, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ type: 'spring', stiffness: 100 }}
-                whileHover={{ scale: 1.1 }}
-                className="show-add-property"
-            >
-                <button className="btn" onClick={fadeAddProperty}>
-                    Add Property
-                </button>
-            </motion.div>
+            {!showAddProperty && (
+                <motion.div
+                    initial={{ x: -1000, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ type: 'spring', stiffness: 100 }}
+                    whileHover={{ scale: 1.1 }}
+                    className="show-add-property"
+                >
+                    <button className="btn" onClick={fadeAddProperty}>
+                        Add Property
+                    </button>
+                </motion.div>
+            )}
 
             {showAddProperty && (
                 <motion.div
@@ -520,7 +512,7 @@ function AddPropertyForm() {
                                 <input
                                     type="number"
                                     name="price"
-                                    placeholder="40"
+                                    placeholder="$0"
                                     value={fields.price}
                                     onChange={handleFieldsChange}
                                     className="addpropertyform-input"
@@ -860,10 +852,22 @@ function AddPropertyForm() {
                                 </div>
                             </motion.div>
                         )}
-
-                        <button className="btn" onClick={handleSubmit}>
-                            Submit
-                        </button>
+                        <div className="submit">
+                            {!isFieldsExist ? (
+                                <button className="btn" onClick={handleSubmit}>
+                                    Submit
+                                </button>
+                            ) : (
+                                <Link to={'/my-properties'}>
+                                    <button
+                                        className="btn"
+                                        onClick={handleSubmit}
+                                    >
+                                        Submit
+                                    </button>
+                                </Link>
+                            )}
+                        </div>
                         {error ? (
                             <p style={{ color: 'red', textAlign: 'center' }}>
                                 Please Fill All inputs
@@ -875,285 +879,6 @@ function AddPropertyForm() {
                 </motion.div>
             )}
         </div>
-
-        // --------------------------old jsx-----------------------
-        // <div className="form-wrapper">
-        //     <div className="form">
-        //         <h1>Add Your Property</h1>
-        //         <div className="photos-wrapper">
-        //             <div className="photos">
-        //                 <label htmlFor="first">
-        //                     Cover Photo:{' '}
-        //                     <input
-        //                         type="file"
-        //                         name="first"
-        //                         accept="image/*"
-        //                         onChange={handleImagesChange}
-        //                     />
-        //                 </label>
-        //                 <label htmlFor="second">
-        //                     Second Photo:{' '}
-        //                     <input
-        //                         type="file"
-        //                         name="second"
-        //                         accept="image/*"
-        //                         onChange={handleImagesChange}
-        //                     />
-        //                 </label>
-        //                 <label htmlFor="third">
-        //                     Third Photo:{' '}
-        //                     <input
-        //                         type="file"
-        //                         name="third"
-        //                         accept="image/*"
-        //                         onChange={handleImagesChange}
-        //                     />
-        //                 </label>
-        //             </div>
-        //             <div className="photos">
-        //                 <label htmlFor="forth">
-        //                     Fourth Photo:{' '}
-        //                     <input
-        //                         type="file"
-        //                         name="forth"
-        //                         accept="image/*"
-        //                         onChange={handleImagesChange}
-        //                     />
-        //                 </label>
-        //                 <label htmlFor="fifth">
-        //                     Fifth Photo:{' '}
-        //                     <input
-        //                         type="file"
-        //                         name="fifth"
-        //                         accept="image/*"
-        //                         onChange={handleImagesChange}
-        //                     />
-        //                 </label>
-        //             </div>
-        //         </div>
-
-        //         <div>
-        //             <label htmlFor="title">Property Title: </label>
-        //             <input
-        //                 className="text-input"
-        //                 type="text"
-        //                 name="title"
-        //                 placeholder="Your property's title"
-        //                 value={fields.title}
-        //                 onChange={handleFieldsChange}
-        //             />
-        //         </div>
-        //         <div className="desc">
-        //             <label htmlFor="desc">Description:</label>
-        //             <textarea
-        //                 name="description"
-        //                 cols="20"
-        //                 rows="5"
-        //                 placeholder="Tell about your property...."
-        //                 value={fields.description}
-        //                 onChange={handleFieldsChange}
-        //             ></textarea>
-        //         </div>
-        //         <div>
-        //             <label htmlFor="price">Price: </label>
-        //             <input
-        //                 className="text-input"
-        //                 type="number"
-        //                 name="price"
-        //                 placeholder="40"
-        //                 value={fields.price}
-        //                 onChange={handleFieldsChange}
-        //             />
-        //             <p>$/night</p>
-        //         </div>
-        //         <div className="select">
-        //             <label htmlFor="type">Property Type:</label>
-        //             <select
-        //                 name="type"
-        //                 value={fields.type}
-        //                 onChange={handleFieldsChange}
-        //             >
-        //                 <option value="">Choose one</option>
-        //                 <option value="house">House</option>
-        //                 <option value="apartment">Apartment</option>
-        //                 <option value="cabin">Cabin</option>
-        //                 <option value="villa">Villa</option>
-        //             </select>
-        //         </div>
-        //         <div className="location">
-        //             <div>
-        //                 <label htmlFor="country">Country:</label>
-        //                 <input
-        //                     list="countries"
-        //                     name="country"
-        //                     className="text-input"
-        //                     value={location.country}
-        //                     onChange={handleLocationChange}
-        //                 />
-        //                 <datalist id="countries">
-        //                     {countriesWithCities.map((country) => {
-        //                         return <option value={country.country} />;
-        //                     })}
-        //                 </datalist>
-        //             </div>
-        //             <div>
-        //                 <label htmlFor="city">City:</label>
-        //                 <input
-        //                     list="cities"
-        //                     name="city"
-        //                     className="text-input"
-        //                     value={location.city}
-        //                     onChange={handleLocationChange}
-        //                 />
-        //                 <datalist id="cities">
-        //                     {countriesWithCities.map((city) => {
-        //                         return <option value={city.cities} />;
-        //                     })}
-        //                 </datalist>
-        //             </div>
-        //         </div>
-        //         <div className="address">
-        //             <label htmlFor="address">Address:</label>
-        //             <textarea
-        //                 name="address"
-        //                 cols="20"
-        //                 rows="5"
-        //                 value={location.address}
-        //                 onChange={handleLocationChange}
-        //             ></textarea>
-        //         </div>
-        //         <div className="date">
-        //             <div>
-        //                 <label htmlFor="fromDate">From:</label>
-        //                 <input
-        //                     type="date"
-        //                     name="startDate"
-        //                     value={fields.startDate}
-        //                     onChange={handleFieldsChange}
-        //                 />
-        //             </div>
-        //             <div>
-        //                 <label htmlFor="toDate">To:</label>
-        //                 <input
-        //                     type="date"
-        //                     name="endDate"
-        //                     value={fields.endDate}
-        //                     onChange={handleFieldsChange}
-        //                 />
-        //             </div>
-        //         </div>
-        //         <div className="details">
-        //             <div>
-        //                 <label htmlFor="guests">
-        //                     Guests:{' '}
-        //                     <input
-        //                         type="number"
-        //                         name="guests"
-        //                         placeholder="0"
-        //                         value={details.guests}
-        //                         onChange={handleDetailsChange}
-        //                     />
-        //                 </label>
-        //                 <label htmlFor="bedrooms">
-        //                     Bedrooms:{' '}
-        //                     <input
-        //                         type="number"
-        //                         name="bedrooms"
-        //                         placeholder="0"
-        //                         value={details.bedrooms}
-        //                         onChange={handleDetailsChange}
-        //                     />
-        //                 </label>
-        //             </div>
-        //             <div>
-        //                 <label htmlFor="beds">
-        //                     Beds:{' '}
-        //                     <input
-        //                         type="number"
-        //                         name="beds"
-        //                         placeholder="0"
-        //                         value={details.beds}
-        //                         onChange={handleDetailsChange}
-        //                     />
-        //                 </label>
-        //                 <label htmlFor="baths">
-        //                     Baths:{' '}
-        //                     <input
-        //                         type="number"
-        //                         name="baths"
-        //                         placeholder="0"
-        //                         value={details.baths}
-        //                         onChange={handleDetailsChange}
-        //                     />
-        //                 </label>
-        //             </div>
-        //         </div>
-        //         <div className="offers">
-        //             <div>
-        //                 <input
-        //                     type="checkbox"
-        //                     name="wifi"
-        //                     checked={offers.wifi}
-        //                     onChange={handleOffersChange}
-        //                 />
-        //                 <label htmlFor="wifi">Wifi</label>
-        //                 <input
-        //                     type="checkbox"
-        //                     name="kitchen"
-        //                     checked={offers.kitchen}
-        //                     onChange={handleOffersChange}
-        //                 />
-        //                 <label htmlFor="kitchen">Kitchen</label>
-        //                 <input
-        //                     type="checkbox"
-        //                     name="pets"
-        //                     checked={offers.pets}
-        //                     onChange={handleOffersChange}
-        //                 />
-        //                 <label htmlFor="pets">Pets</label>
-        //                 <input
-        //                     type="checkbox"
-        //                     name="tv"
-        //                     checked={offers.tv}
-        //                     onChange={handleOffersChange}
-        //                 />
-        //                 <label htmlFor="tv">TV</label>
-        //             </div>
-        //             <div>
-        //                 <input
-        //                     type="checkbox"
-        //                     name="smoke"
-        //                     checked={offers.smoke}
-        //                     onChange={handleOffersChange}
-        //                 />
-        //                 <label htmlFor="smoke">Smoke</label>
-        //                 <input
-        //                     type="checkbox"
-        //                     name="parking"
-        //                     checked={offers.parking}
-        //                     onChange={handleOffersChange}
-        //                 />
-        //                 <label htmlFor="parking">Parking</label>
-        //                 <input
-        //                     type="checkbox"
-        //                     name="pool"
-        //                     checked={offers.pool}
-        //                     onChange={handleOffersChange}
-        //                 />
-        //                 <label htmlFor="pool">Pool</label>
-        //             </div>
-        //         </div>
-
-        //         <button className="btn" onClick={handleSubmit}>
-        //             Add your property
-        //         </button>
-        //         {error ? (
-        //             <p style={{ color: 'red' }}>Please Fill All inputs</p>
-        //         ) : (
-        //             ''
-        //         )}
-        //     </div>
-        // </div>
     );
 }
 

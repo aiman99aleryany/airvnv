@@ -212,7 +212,7 @@ const INIT_PROPERITES = [
             fifth: 'https://cdn.pixabay.com/photo/2017/03/22/17/39/kitchen-2165756_960_720.jpg',
         },
         createdAt: Date.now(),
-        startDate: '2023/02/4',
+        startDate: '2023/02/04',
         endDate: '2023/02/16',
         details: {
             guests: 5,
@@ -356,8 +356,8 @@ const INIT_PROPERITES = [
             fifth: 'https://cdn.pixabay.com/photo/2014/08/08/22/14/cabin-413770_960_720.jpg',
         },
         createdAt: Date.now(),
-        startDate: '02/01/2023',
-        endDate: '11/02/2023',
+        startDate: '2023/02/29',
+        endDate: '2023/03/15',
         details: {
             guests: 1,
             bedrooms: 1,
