@@ -5,7 +5,13 @@ import { motion } from 'framer-motion';
 function Right(props) {
     const { property } = props;
     return (
-        <div className="container">
+        <motion.div
+            initial={{ x: 1000 }}
+            whileInView={{ x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="container"
+        >
             <img src={property.images.second} alt="first" />
             <img src={property.images.third} alt="second" />
 
@@ -55,7 +61,7 @@ function Right(props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

@@ -22,7 +22,7 @@ import { Link } from 'react-router-dom';
 import { toUnix } from '../../store/unixTime';
 import useStoreProperties from '../../store/store';
 import useStoreUsers from '../../store/store-users';
-
+import { motion } from 'framer-motion';
 import './List.scss';
 
 function List(props) {
@@ -131,16 +131,31 @@ function List(props) {
     };
 
     return (
-        <div className="list">
+        <motion.div
+            initial={{ y: 1000 }}
+            animate={{ y: 0 }}
+            transition={{ type: 'twin', duration: 1, delay: 0.1 }}
+            className="list"
+        >
             <div className="list-content">
-                <div className="list-header">
+                <motion.div
+                    initial={{ x: -1000 }}
+                    animate={{ x: 0 }}
+                    transition={{ type: 'twin', duration: 1, delay: 0.6 }}
+                    className="list-header"
+                >
                     <h1>
                         {' '}
                         <span> Property </span> Details
                     </h1>
-                </div>
+                </motion.div>
 
-                <div className="list-factors">
+                <motion.div
+                    initial={{ x: -1000 }}
+                    animate={{ x: 0 }}
+                    transition={{ type: 'twin', duration: 1, delay: 0.8 }}
+                    className="list-factors"
+                >
                     <div className="list-rating">
                         <span>{property.rating}</span>
                         <AiFillStar className="icon" />
@@ -158,9 +173,14 @@ function List(props) {
                         <span>Type: </span>
                         <h4>{property.type}</h4>
                     </div>
-                </div>
+                </motion.div>
 
-                <div className="list-images">
+                <motion.div
+                    initial={{ x: 2000 }}
+                    animate={{ x: 0 }}
+                    transition={{ type: 'twin', duration: 1, delay: 1.0 }}
+                    className="list-images"
+                >
                     <button
                         className="image-slideBtn image-slideBtn1 btn"
                         onClick={decrementImageIndex}
@@ -189,13 +209,23 @@ function List(props) {
                             );
                         })}
                     </div>
-                </div>
+                </motion.div>
 
-                <div className="list-price">
+                <motion.div
+                    initial={{ x: 2000 }}
+                    animate={{ x: 0 }}
+                    transition={{ type: 'spring', stiffness: 120 }}
+                    className="list-price"
+                >
                     <span>${property.price}/Night</span>
-                </div>
+                </motion.div>
 
-                <div className="list-location">
+                <motion.div
+                    initial={{ x: 2000 }}
+                    animate={{ x: 0 }}
+                    transition={{ type: 'spring', stiffness: 120 }}
+                    className="list-location"
+                >
                     <h3>Location</h3>
                     <div>
                         <h4>
@@ -205,13 +235,23 @@ function List(props) {
                             City: <span>{property.location.city}</span>{' '}
                         </h4>
                     </div>
-                </div>
+                </motion.div>
 
-                <div className="list-description">
+                <motion.div
+                    initial={{ x: 2000 }}
+                    animate={{ x: 0 }}
+                    transition={{ type: 'spring', stiffness: 120 }}
+                    className="list-description"
+                >
                     <span>About the Property</span>
                     <p>{property.description}</p>
-                </div>
-                <div className="list-date">
+                </motion.div>
+                <motion.div
+                    initial={{ x: 2000 }}
+                    animate={{ x: 0 }}
+                    transition={{ type: 'spring', stiffness: 120 }}
+                    className="list-date"
+                >
                     <div className="list-startDate">
                         <span>Available From</span>
                         <time>{property.startDate}</time>
@@ -221,7 +261,7 @@ function List(props) {
                         <span>To</span>
                         <time>{property.endDate}</time>
                     </div>
-                </div>
+                </motion.div>
 
                 <div className="list-details">
                     <h4>Details</h4>
@@ -317,7 +357,16 @@ function List(props) {
                     </ul>
                 </div>
 
-                {isUserSignedIn ? null : <p>Sign in to book This Property</p>}
+                {isUserSignedIn ? null : (
+                    <Link to={'/signin'} className="signin-prompt">
+                        <motion.button
+                            className="btn"
+                            whileHover={{ scale: 1.1 }}
+                        >
+                            Sign in to book This Property
+                        </motion.button>
+                    </Link>
+                )}
                 {isUserSignedIn &&
                     currentUserId !== property.ownerId &&
                     !isBooked && (
@@ -372,7 +421,7 @@ function List(props) {
                     ) : null}
                 </div>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

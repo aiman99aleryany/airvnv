@@ -6,7 +6,13 @@ function Left(props) {
     const { property } = props;
 
     return (
-        <div className="container">
+        <motion.div
+            initial={{ x: -1000 }}
+            whileInView={{ x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="container"
+        >
             <img
                 className="span-3 image-grid-row-2 order-1"
                 src={property.images.first}
@@ -57,7 +63,7 @@ function Left(props) {
                     </motion.button>
                 </Link>
             </div>
-        </div>
+        </motion.div>
     );
 }
 
