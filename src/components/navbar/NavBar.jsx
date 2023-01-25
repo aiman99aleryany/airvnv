@@ -12,7 +12,6 @@ import './NavBar.scss';
 function NavBar() {
     const [click, setClick] = useState(false);
     const isSignedIn = getLocalStorage('isUserSignedIn');
-    const currentUserId = getLocalStorage('currentUserId');
 
     const handleClick = () => setClick((state) => !state);
 

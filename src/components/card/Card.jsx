@@ -1,5 +1,4 @@
 import React from 'react';
-import House1 from '../../assets/house1.jpg';
 import { FiUser } from 'react-icons/fi';
 import { MdOutlineBedroomParent } from 'react-icons/md';
 import { FaBed, FaBath } from 'react-icons/fa';
@@ -15,7 +14,7 @@ function Card(props) {
         property;
     const { first } = images;
     const { guests, bedrooms, beds, baths } = details;
-    const { country, city } = location;
+    const {  city } = location;
 
     return (
         <div className="card">
