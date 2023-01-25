@@ -330,8 +330,8 @@ const INIT_PROPERITES = [
                 id: '17',
                 username: '',
                 name: '',
-                checkIn: '',
-                checkOut: '',
+                checkIn: '2023/02/12',
+                checkOut: '2023/02/17',
             },
         ],
         description:

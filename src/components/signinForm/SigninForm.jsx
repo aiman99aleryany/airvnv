@@ -21,7 +21,7 @@ function SigninForm() {
         e.preventDefault();
         const isUsernameExist = username ? true : false;
         const isPasswordExist = password ? true : false;
-        const isFieldsExist = isUsernameExist && isPasswordExist ? true : false;
+        const isFieldsExist = isUsernameExist || isPasswordExist ? true : false;
 
         if (isFieldsExist) {
             const thisUser = users.filter((user) => {

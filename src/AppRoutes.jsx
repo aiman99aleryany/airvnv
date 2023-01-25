@@ -6,6 +6,8 @@ import Property from './pages/Property';
 import ViewAll from './pages/ViewAll';
 import Test from './pages/Test';
 import MyProperties from './pages/MyProperties';
+import CheckBooking from './pages/CheckBooking';
+
 const AppRoutes = [
     {
         path: 'test',
@@ -34,6 +36,10 @@ const AppRoutes = [
     {
         path: 'bookings',
         element: <Bookings />,
+    },
+    {
+        path: 'check-booking/:id',
+        element: <CheckBooking />
     },
     {
         path: 'property/:id',
