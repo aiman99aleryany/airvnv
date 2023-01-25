@@ -5,6 +5,7 @@ import { nanoid } from 'nanoid';
 import useStoreProperties from '../../store/store';
 import { motion } from 'framer-motion';
 import useStoreUsers from '../../store/store-users';
+import { Link } from 'react-router-dom';
 import './BookingDetails.scss';
 
 function BookingDetails(props) {
@@ -32,8 +33,8 @@ function BookingDetails(props) {
     const [imageIndex, setImageIndex] = useState(0);
     const [isBookingExist, setIsBookingExist] = useState(true);
     const [isEditBooking, setIsEditBooking] = useState(false);
-    const [bookStartDate, setBookStartDate] = useState(currentBooking.checkIn);
-    const [bookEndDate, setBookEndDate] = useState(currentBooking.checkOut);
+    const [bookStartDate, setBookStartDate] = useState('');
+    const [bookEndDate, setBookEndDate] = useState('');
     const [startDateError, setStartDateError] = useState(false);
     const [endDateError, setEndDateError] = useState(false);
 
@@ -55,7 +56,6 @@ function BookingDetails(props) {
         editProperty(property.id, { bookings: newBookings });
         setIsBookingExist(false);
         setLocalStorage('currentBooking', null);
-        window.location.href = '/';
     };
 
     const editBooking = () => {
@@ -88,8 +88,6 @@ function BookingDetails(props) {
         }
     };
 
-
-
     const bookListing = () => {
         const propertyNewBooking = {
             bookings: [
@@ -120,7 +118,7 @@ function BookingDetails(props) {
                 </h1>
             </motion.div>
 
-            {isBookingExist && (
+            {isBookingExist ? (
                 <div className="booking-content">
                     <div className="booking-images">
                         <button
@@ -155,33 +153,18 @@ function BookingDetails(props) {
                         <div className="booking-info-title">
                             <h1>{property.title}</h1>
                         </div>
-                        <div className='property-real-dates'>
+                        <div className="property-real-dates">
                             <div>
-                                <h2>
-                                    Available From
-                                </h2>
-                                <span>
-                                    {
-                                        property.startDate
-                                    }
-                                </span>
+                                <h2>Available From</h2>
+                                <span>{property.startDate}</span>
                             </div>
                             <div>
-                                <h2>
-                                    To 
-                                </h2>
-                                <span>
-                                    {
-                                        property.endDate
-                                    }
-                                </span>
-
+                                <h2>To</h2>
+                                <span>{property.endDate}</span>
                             </div>
                         </div>
                         <div className="booking-info-checkin">
-                            <h2>
-                                Check-in:
-                            </h2>
+                            <h2>Check-in:</h2>
                             <span>
                                 {
                                     property.bookings.filter((booking) => {
@@ -191,9 +174,7 @@ function BookingDetails(props) {
                             </span>
                         </div>
                         <div className="booking-info-checkout">
-                            <h2>
-                                Check-out:
-                            </h2>
+                            <h2>Check-out:</h2>
                             <span>
                                 {
                                     property.bookings.filter((booking) => {
@@ -202,6 +183,7 @@ function BookingDetails(props) {
                                 }
                             </span>
                         </div>
+
                         <div className="booking-info-price">
                             <h2>${property.price}/Night</h2>
                         </div>
@@ -216,10 +198,10 @@ function BookingDetails(props) {
                         </div>
                     </div>
                 </div>
-            )}
+            ) : null}
 
-            {isBookingExist && (
-                <div className='modify-section'>
+            {isBookingExist ? (
+                <div className="modify-section">
                     <motion.button
                         whileHover={{ scale: 1.1 }}
                         className="btn"
@@ -267,13 +249,27 @@ function BookingDetails(props) {
                                 )}
                             </div>
                             <motion.button
-                                whileHover={{scale: 1.1}}
-                                className='btn' onClick={bookListing}>
-                               Edit 
+                                whileHover={{ scale: 1.1 }}
+                                className="btn"
+                                onClick={bookListing}
+                            >
+                                Edit
                             </motion.button>
                         </div>
                     )}
                 </div>
+            ) : (
+                <motion.div
+                    initial={{ x: -1000, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ type: 'spring', stiffness: 200 }}
+                >
+                    <Link to={'/bookings'}>
+                        <motion.button whileHover={{ scale: 1.1 }} className="btn">
+                            Go to My Bookings
+                        </motion.button>
+                    </Link>
+                </motion.div>
             )}
         </div>
     );
