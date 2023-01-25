@@ -1,26 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from '../card/Card';
 import { motion } from 'framer-motion';
 import useStoreProperties from '../../store/store';
 import { nanoid } from 'nanoid';
 import { getLocalStorage } from '../../store/localStorage';
 import useStoreUsers from '../../store/store-users';
+import { Link } from 'react-router-dom';
 
 import './ListBookings.scss';
 
 function ListBookings() {
+
     const currentUserIdInLocal = getLocalStorage('currentUserId');
-
     const properties = useStoreProperties((state) => state.properties);
-    const editProperty = useStoreProperties((state) => state.editProperty);
-
-    const cancelBooking = (p) => {
-        const newBookings = p.bookings.filter((booking) => {
-            return booking.id !== currentUserIdInLocal;
-        });
-
-        editProperty(p.id, { bookings: newBookings });
-    };
 
     return (
         <div>
@@ -36,16 +28,14 @@ function ListBookings() {
                 </h1>
             </motion.div>
 
+
             <div className="cards">
                 <div className="cards-content">
                     {properties
                         .filter((property) => {
                             console.log(property);
                             for (let i = 0; i < property.bookings.length; i++) {
-                                if (
-                                    property.bookings[i].id ===
-                                    currentUserIdInLocal
-                                ) {
+                                if (property.bookings[i].id === currentUserIdInLocal) {
                                     return true;
                                 }
                             }
@@ -64,20 +54,13 @@ function ListBookings() {
                                     key={nanoid()}
                                 >
                                     <Card property={property} />
-                                    <motion.button
-                                        className="btn"
-                                        whileHover={{ scale: 1.1 }}
-                                        onClick={() => cancelBooking(property)}
-                                    >
-                                        Cancel Booking
-                                    </motion.button>
-                                    {/* <motion.button
-                                        className="btn"
-                                        whileHover={{ scale: 1.1 }}
-                                        onClick={() => changeDate(property)}
-                                    >
-                                        Change Date
-                                    </motion.button> */}
+                                    <div className='check-bookingBtn'>
+                                        <Link to={`/check-booking/${property.id}`}>
+                                            <motion.button whileHover={{scale:1.1}} className="btn">
+                                                Check Booking
+                                            </motion.button>
+                                        </Link>
+                                    </div>
                                 </motion.div>
                             );
                         })}

@@ -4,19 +4,8 @@ import { fromUnix } from '../../store/unixTime';
 import { AiFillStar } from 'react-icons/ai';
 import { FiUser } from 'react-icons/fi';
 import { getLocalStorage, setLocalStorage } from '../../store/localStorage';
-import {
-    MdOutlineBedroomParent,
-    MdOutlineMonitor,
-    MdPets,
-    MdLocalParking,
-} from 'react-icons/md';
-import {
-    FaBed,
-    FaBath,
-    FaWifi,
-    FaSmoking,
-    FaSwimmingPool,
-} from 'react-icons/fa';
+import { MdOutlineBedroomParent, MdOutlineMonitor, MdPets, MdLocalParking } from 'react-icons/md';
+import { FaBed, FaBath, FaWifi, FaSmoking, FaSwimmingPool } from 'react-icons/fa';
 import { TbToolsKitchen2 } from 'react-icons/tb';
 import { Link } from 'react-router-dom';
 import { toUnix } from '../../store/unixTime';
@@ -66,6 +55,13 @@ function List(props) {
         }
     }, [property.startDate, property.endDate, bookStartDate, bookEndDate]);
 
+    useEffect(() => {
+        const isBookingMatching = property.bookings.filter((booking) => {
+            return booking.id === currentUserId;
+        });
+        if (isBookingMatching.length >= 1) setIsBooked(true);
+    }, [property, currentUserId, setIsBooked]);
+
     const incrementImageIndex = () => {
         if (imageIndex >= imagesArray.length - 1) return;
         setImageIndex((state) => state + 1);
@@ -81,10 +77,7 @@ function List(props) {
         const unixPropertyStartDate = toUnix(property.startDate);
         const unixPropertyEndDate = toUnix(property.endDate);
 
-        if (
-            unixInputDate >= unixPropertyStartDate &&
-            unixInputDate < unixPropertyEndDate
-        ) {
+        if (unixInputDate >= unixPropertyStartDate && unixInputDate < unixPropertyEndDate) {
             setBookStartDate(e.target.value);
             setStartDateError(false);
         } else {
@@ -98,10 +91,7 @@ function List(props) {
         const unixPropertyStartDate = toUnix(property.startDate);
         const unixPropertyEndDate = toUnix(property.endDate);
 
-        if (
-            unixInputDate <= unixPropertyEndDate &&
-            unixInputDate > unixPropertyStartDate
-        ) {
+        if (unixInputDate <= unixPropertyEndDate && unixInputDate > unixPropertyStartDate) {
             setBookEndDate(e.target.value);
             setEndDateError(false);
         } else {
@@ -199,9 +189,7 @@ function List(props) {
                             return (
                                 <div
                                     className={
-                                        imageIndex === index
-                                            ? 'index index-active'
-                                            : 'index'
+                                        imageIndex === index ? 'index index-active' : 'index'
                                     }
                                     key={nanoid}
                                     onClick={() => setImageIndex(index)}
@@ -212,8 +200,8 @@ function List(props) {
                 </motion.div>
 
                 <motion.div
-                    initial={{ x: 2000 }}
-                    animate={{ x: 0 }}
+                    initial={{ x: 1000 }}
+                    animate={{x: 0}}
                     transition={{ type: 'spring', stiffness: 120 }}
                     className="list-price"
                 >
@@ -273,9 +261,7 @@ function List(props) {
                         </li>
                         <li>
                             <MdOutlineBedroomParent className="icon" />
-                            Bedrooms: <span>
-                                {property.details.bedrooms}
-                            </span>{' '}
+                            Bedrooms: <span>{property.details.bedrooms}</span>{' '}
                         </li>
                         <li>
                             <FaBed className="icon" />
@@ -293,131 +279,101 @@ function List(props) {
                     <ul>
                         <li>
                             <FaWifi className="icon" />
-                            Wifi:{' '}
-                            {property.offers.wifi ? (
-                                <span>Yes</span>
-                            ) : (
-                                <span>no</span>
-                            )}
+                            Wifi: {property.offers.wifi ? <span>Yes</span> : <span>no</span>}
                         </li>
                         <li>
                             <TbToolsKitchen2 className="icon" />
-                            Kitchen:{' '}
-                            {property.offers.kitchen ? (
-                                <span>Yes</span>
-                            ) : (
-                                <span>no</span>
-                            )}
+                            Kitchen: {property.offers.kitchen ? <span>Yes</span> : <span>no</span>}
                         </li>
                         <li>
                             <MdOutlineMonitor className="icon" />
-                            TV:{' '}
-                            {property.offers.tv ? (
-                                <span>Yes</span>
-                            ) : (
-                                <span>no</span>
-                            )}
+                            TV: {property.offers.tv ? <span>Yes</span> : <span>no</span>}
                         </li>
                         <li>
                             <MdPets className="icon" />
-                            Pets:{' '}
-                            {property.offers.pets ? (
-                                <span>Yes</span>
-                            ) : (
-                                <span>no</span>
-                            )}
+                            Pets: {property.offers.pets ? <span>Yes</span> : <span>no</span>}
                         </li>
                         <li>
                             <FaSmoking className="icon" />
-                            Smoking:{' '}
-                            {property.offers.smoke ? (
-                                <span>Yes</span>
-                            ) : (
-                                <span>no</span>
-                            )}
+                            Smoking: {property.offers.smoke ? <span>Yes</span> : <span>no</span>}
                         </li>
                         <li>
                             <MdLocalParking className="icon" />
-                            Parking:{' '}
-                            {property.offers.sparking ? (
-                                <span>Yes</span>
-                            ) : (
-                                <span>no</span>
-                            )}
+                            Parking: {property.offers.sparking ? <span>Yes</span> : <span>no</span>}
                         </li>
                         <li>
                             <FaSwimmingPool className="icon" />
-                            Pool:{' '}
-                            {property.offers.pool ? (
-                                <span>Yes</span>
-                            ) : (
-                                <span>no</span>
-                            )}
+                            Pool: {property.offers.pool ? <span>Yes</span> : <span>no</span>}
                         </li>
                     </ul>
                 </div>
 
                 {isUserSignedIn ? null : (
                     <Link to={'/signin'} className="signin-prompt">
-                        <motion.button
-                            className="btn"
-                            whileHover={{ scale: 1.1 }}
-                        >
+                        <motion.button className="btn" whileHover={{ scale: 1.1 }}>
                             Sign in to book This Property
                         </motion.button>
                     </Link>
                 )}
-                {isUserSignedIn &&
-                    currentUserId !== property.ownerId &&
-                    !isBooked && (
-                        <div className="list-input">
+                {isUserSignedIn && currentUserId !== property.ownerId && !isBooked && (
+                    <div className="choose-date">
+                        <div className="choose-date-start">
                             <label htmlFor="startDate">check in: </label>
                             <input
                                 name="startDate"
                                 type="date"
                                 value={bookStartDate}
                                 onChange={handleBookStartDateChange}
+                                className="list-input"
                             />
                             {startDateError && (
-                                <p>Please Select a valid check in Date</p>
+                                <p style={{ color: 'red' }}>Please Select a valid check in Date</p>
                             )}
+                        </div>
+                        <div className="choose-date-end">
                             <label htmlFor="endDate">check out:</label>
                             <input
                                 name="endDate"
                                 type="date"
                                 value={bookEndDate}
                                 onChange={handleBookEndDateChange}
+                                className="list-input"
                             />
                             {endDateError && (
-                                <p>Please Select a valid check out Date</p>
+                                <p style={{ color: 'red' }}>Please Select a valid check out Date</p>
                             )}
                         </div>
-                    )}
+                    </div>
+                )}
                 <div className="list-bookBtn">
-                    {isUserSignedIn &&
-                    currentUserId !== property.ownerId &&
-                    !isBooked ? (
+                    {isUserSignedIn && currentUserId !== property.ownerId && !isBooked ? (
                         isAbleToBook ? (
                             <div>
                                 <Link to={'/bookings'}>
-                                    <button
+                                    <motion.button
+                                        whileHover={{ scale: 1.1 }}
                                         className="btn"
                                         onClick={bookListing}
                                     >
                                         Book
-                                    </button>
+                                    </motion.button>
                                 </Link>
                             </div>
                         ) : (
                             <div>
-                                <button className="btn" onClick={showRejection}>
+                                <motion.button
+                                    whileHover={{ scale: 1.1 }}
+                                    className="btn"
+                                    onClick={showRejection}
+                                >
                                     Book
-                                </button>
-                                {isBookingRejection ? (
-                                    <p>Please Enter Valid Dates</p>
-                                ) : null}
+                                </motion.button>
                             </div>
                         )
+                    ) : null}
+
+                    {isBookingRejection ? (
+                        <p style={{ color: 'red' }}>Please Enter Valid Dates</p>
                     ) : null}
                 </div>
             </div>
