@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Card from '../card/Card';
 import { motion } from 'framer-motion';
 import useStoreProperties from '../../store/store';
 import { nanoid } from 'nanoid';
 import { getLocalStorage } from '../../store/localStorage';
-import useStoreUsers from '../../store/store-users';
 import { Link } from 'react-router-dom';
 
 import './ListBookings.scss';
