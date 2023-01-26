@@ -1,23 +1,27 @@
 import { create } from 'zustand';
-import { INIT_PROPERITES } from './initStoreProperties';
+import { INIT_PROPERITES } from './INIT_PROPERTIES';
 
-const useStoreProperties = create((set) => ({
+const useProperties = create((set) => ({
     properties: INIT_PROPERITES,
+
     addProperty: (newProperty) => {
         return set((state) => ({
             properties: [...state.properties, newProperty],
         }));
     },
+
     addProperties: (newProperties) => {
         return set((state) => ({
             properties: [...state.properties, ...newProperties],
         }));
     },
+
     deleteProperty: (propertyId) => {
         return set((state) => ({
             properties: state.properties.filter(({ id }) => id !== propertyId),
         }));
     },
+
     toggleIsEdited: (propertyId) => {
         return set((state) => ({
             properties: state.properties.map((property) =>
@@ -27,6 +31,7 @@ const useStoreProperties = create((set) => ({
             ),
         }));
     },
+
     editProperty: (propertyId, editedProperty) => {
         return set((state) => ({
             properties: state.properties.map((property) =>
@@ -38,4 +43,4 @@ const useStoreProperties = create((set) => ({
     },
 }));
 
-export default useStoreProperties;
+export default useProperties;

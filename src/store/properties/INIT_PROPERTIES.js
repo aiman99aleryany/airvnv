@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 
-const INIT_PROPERITES = [
+const INIT_PROPERTIES = [
     {
         id: nanoid(),
         ownerId: '17',
@@ -387,4 +387,4 @@ const INIT_PROPERITES = [
     },
 ];
 
-export { INIT_PROPERITES };
+export default INIT_PROPERTIES;

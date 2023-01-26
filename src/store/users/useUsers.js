@@ -1,16 +1,16 @@
 import { create } from 'zustand';
-import INIT_USERS from './initUsers';
+import INIT_USERS from './INIT_USERS';
 
-const useStoreUsers = create((set) => ({
+const useUsers = create((set) => ({
     users: INIT_USERS,
 
-    addNewUser: (newUser) => {
+    addUser: (newUser) => {
         return set((state) => ({
             users: [...state.users, newUser],
         }));
     },
 
-    addNewUsers: (newUsers) => {
+    addUsers: (newUsers) => {
         return set((state) => ({
             users: [...state.users, ...newUsers],
         }));
@@ -25,4 +25,4 @@ const useStoreUsers = create((set) => ({
     },
 }));
 
-export default useStoreUsers;
+export default useUsers;

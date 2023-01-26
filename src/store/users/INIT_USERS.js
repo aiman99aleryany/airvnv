@@ -1,0 +1,36 @@
+const INIT_USERS = [
+    {
+        id: '17',
+        username: 'Aiman99',
+        email: 'aiman99.aleryany@gmail.com',
+        password: 'aiman99',
+        firstName: 'Aiman',
+        lastName: 'Al Eryany',
+        birthDate: '1999-07-13',
+        properties: [],
+        bookings: [],
+        profileImage: '',
+        lastLogIn: '',
+        isSignedIn: false,
+        isEdited: false,
+        notifactions: [],
+    },
+    {
+        id: '19',
+        username: 'Arya99',
+        email: 'devaryakrm@gmail.com',
+        password: 'arya99',
+        firstName: 'Arya',
+        lastName: 'Karimi',
+        birthDate: '1999-07-13',
+        properties: [],
+        bookings: [],
+        profileImage: '',
+        lastLogIn: '',
+        isSignedIn: false,
+        isEdited: false,
+        notifactions: [],
+    },
+];
+
+export default INIT_USERS;

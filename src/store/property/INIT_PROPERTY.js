@@ -1,26 +1,30 @@
 import { nanoid } from 'nanoid';
-import { getLocalStorage } from './localStorage';
+import { getLocalStorage } from '../localStorage';
 
+// for now the current user will be fitched from the localStorage
+// later the current user will be fitched from the server.
 const currentUserId = getLocalStorage('currentUserId');
-const initProperty = {
+
+const INIT_PROPERTY = {
     id: nanoid(),
     ownerId: currentUserId,
     title: '',
     type: '',
-    price: null,
+    price: 0,
     location: {
         city: '',
         country: '',
     },
     rating: 0,
     images: {
-        first: '',
-        second: '',
-        third: '',
-        forth: '',
-        fifth: '',
+        img1: '',
+        img2: '',
+        img3: '',
+        img4: '',
+        img5: '',
     },
     createdAt: Date.now(),
+    updatedAt: Date.now(),
     startDate: '',
     endDate: '',
     details: {
@@ -42,4 +46,4 @@ const initProperty = {
     description: '',
 };
 
-export default initProperty;
+export default INIT_PROPERTY;
